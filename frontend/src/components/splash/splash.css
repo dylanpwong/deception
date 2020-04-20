@@ -7,13 +7,15 @@ body {
     flex-direction: column;
 }
 
-.splash-game-title {
+.game-title {
     margin-left: auto;
     margin-right: auto;
     margin-top: 80px;
     font-size: 70px;
     font-family: 'Bungee Inline', cursive;
     color: white;
+    outline: none !important;
+    text-decoration: none;
 }
 
 .splash-form {
@@ -61,11 +63,11 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-top: 30px;
-    font-family: 'Creepster', cursive;
-    font-size: 28px;
+    font-family: 'Trade Winds', cursive;
+    font-size: 26.5px;
     width: 120px;
     height: 40px;
-    outline: none;
+    outline: none !important;
     border-radius: 5px;
     border: 1px solid rgba(0, 0, 0, 0.22);
     

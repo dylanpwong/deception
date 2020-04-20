@@ -1,4 +1,4 @@
-import Game from "./game";
+import WeaponCard from "./weapon_card";
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => ({
@@ -9,4 +9,4 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Game);
+export default connect(mapStateToProps, mapDispatchToProps)(WeaponCard);

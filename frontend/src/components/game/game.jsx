@@ -1,4 +1,5 @@
 import React from 'react';
+import WeaponCard from '../weapon_card/weapon_card_container';
 
 class Game extends React.Component {
      constructor(props) {
@@ -7,7 +8,13 @@ class Game extends React.Component {
 
      render() {
          return (
-             <h1>Game</h1>
+             <>
+                <WeaponCard />
+                <WeaponCard />
+                <WeaponCard />
+                <WeaponCard />
+                <WeaponCard />
+             </>
          )
      }
 }
