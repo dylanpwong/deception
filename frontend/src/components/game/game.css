@@ -1,0 +1,11 @@
+.game-container {
+    display: flex;
+    flex-direction:column;
+    margin: 0 auto;
+    width: 80%;
+}
+
+.game-top-row {
+    display: flex;
+    flex-direction: column;
+}
