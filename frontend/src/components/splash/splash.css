@@ -1,15 +1,34 @@
+body {
+    background-color: rgb(70, 69, 69);
+}
+
 .splash-container {
     display: flex;
     flex-direction: column;
-    background-color: red;
+}
+
+.splash-game-title {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px;
+    font-size: 70px;
+    font-family: 'Bungee Inline', cursive;
+    color: white;
+}
+
+.splash-form {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
     border-radius: 10px;
     width: 600px;
     height: 350px;
-    margin: 145px auto;
+    margin: 25px auto;
     font-family: 'Girassol', cursive;
+    box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.4);
 }
 
-.splash-container h1 {
+.splash-form h1 {
     margin-left: auto;
     margin-right: auto;
     margin-top: 90px;
@@ -20,6 +39,8 @@
 .splash-input-username {
     width: 50%;
     height: 40px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.22);
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
@@ -27,12 +48,34 @@
     padding-left: 10px;
 }
 
+.splash-input-username:focus {
+    box-shadow: 0 0 0 2px red;
+}
+
 .splash-play-button {
     margin-left: auto;
     margin-right: auto;
     margin-top: 30px;
-    font-family: 'Girassol', cursive;
+    font-family: 'Creepster', cursive;
+    font-size: 22px;
     width: 120px;
     height: 40px;
     outline: none;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.22);
+}
+
+.splash-play-button:hover {
+    background-color: red;
+    color: white;
+    transition: 0.5s;
+}
+
+.splash-play-button:not( :hover ){ 
+    transition: 0.25s;   
+ }
+
+.splash-play-button:active {
+    background-color: rgb(165, 11, 5);
+    transition: 0.25s;
 }
