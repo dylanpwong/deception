@@ -1,0 +1,38 @@
+.splash-container {
+    display: flex;
+    flex-direction: column;
+    background-color: red;
+    border-radius: 10px;
+    width: 600px;
+    height: 350px;
+    margin: 145px auto;
+    font-family: 'Girassol', cursive;
+}
+
+.splash-container h1 {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 90px;
+    font-size: 26px;
+    font-family: 'Girassol', cursive;
+}   
+
+.splash-input-username {
+    width: 50%;
+    height: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    font-family: 'Girassol', cursive;
+    padding-left: 10px;
+}
+
+.splash-play-button {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    font-family: 'Girassol', cursive;
+    width: 120px;
+    height: 40px;
+    outline: none;
+}

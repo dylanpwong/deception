@@ -1,10 +1,12 @@
 import React from 'react';
-import './App.css';
+import './reset.css';
+import SplashContainer from './components/splash/splash_container';
 
 function App() {
   return (
     <div className="App">
-      <h1>hello</h1>
+      <SplashContainer />
+
     </div>
   );
 }
