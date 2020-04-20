@@ -1,5 +1,6 @@
 import React from 'react';
-import './splash.css'
+import './splash.css';
+import { Link } from 'react-router-dom';
 
 class Splash extends React.Component {
 
@@ -12,7 +13,7 @@ class Splash extends React.Component {
                 <div className="splash-form">
                     <h1>Enter a username</h1>
                     <input className="splash-input-username" type="text" placeholder="Bob Jenkins"/>
-                    <button className="splash-play-button">Play</button>
+                    <Link className="splash-play-button" to="/loading">Play</Link>
                 </div>
             </div>
             
