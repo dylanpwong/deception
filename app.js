@@ -18,14 +18,14 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
-app.get('/',(req,res)=>{
-    const user = new User({
-       username: "player1",
-       role: "Investogator", 
-    })
-    user.save()
-    res.send("User saved!")
-})
+// app.get('/',(req,res)=>{
+//     const user = new User({
+//        username: "player1",
+//        role: "Investogator", 
+//     })
+//     user.save()
+//     res.send("User saved!")
+// })
 
 app.use("/api/users",users)
 

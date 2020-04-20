@@ -8,7 +8,12 @@ const UserSchema = new Schema({
     },
     role:{
         type: String,
-        required: true
+        required: true,
+        default: "Investigator"
+    },
+    player:{
+        type: Number,
+        required: true,
     },
     date:{
         type: Date,
