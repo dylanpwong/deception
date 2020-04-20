@@ -16,7 +16,7 @@ const CardSchema = new Schema({ // Evidence card or a murder weapon card
   },
 });
 
-const Card = mongoose.model("cards", UserSchema);
+const Card = mongoose.model("cards", CardSchema);
 module.exports = Card;
 
 // const mongoose = require("mongoose");
