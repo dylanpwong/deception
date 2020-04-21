@@ -7,95 +7,95 @@ const EventSchema = new Schema({
     required: true,
   },
 
-//   causeofDeath: {
-//     type: String,
-//     required: true,
-//   },
+  causeOfDeath: {
+    type: Array,
+    required: true,
+  },
 
-//   murdersPersonality:{
-//       type: String,
-//       required: true,
-//   },
+  murdersPersonality:{
+    type: Array,   
+    required: true,
+  },
 
-//   noticedByBystander:{
-//       type: String,
-//       required: true,
-//   },
+  noticedByBystander:{
+      type: Array,
+      required: true,
+  },
 
-//   traceAtTheScene:{
-//       type: String,
-//       required: true,
-//   },
+  traceAtTheScene:{
+      type: Array,
+      required: true,
+  },
 
-//   socialRelationship:{
-//       type: String,
-//       required: true,
-//   },
+  socialRelationship:{
+      type: Array,
+      required: true,
+  },
 
-//   victimsIdentiy:{
-//       type: String,
-//       required: true,
-//   },
+  victimsIdentity:{
+      type: Array,
+      required: true,
+  },
 
-//   stateOfScene:{
-//       type: String,
-//       required: true
-//   },
+  stateOfScene:{
+      type: Array,
+      required: true
+  },
 
-//   inProgress:{
-//       type: String,
-//       required: true,
-//   },
+  // inProgress:{
+  //     type: Array,
+  //     required: true,
+  // },
 
-//   weather: {
-//     type: String,
-//     required: true,
-//   },
+  weather: {
+    type: Array,
+    required: true,
+  },
 
-//   corpseCondition: {
-//       type: String,
-//       required: true
-//   },
+  corpseCondition: {
+      type: Array,
+      required: true
+  },
   
-//   hintOnCorpse: {
-//       type: String,
-//       required: true 
-//   },
+  hintOnCorpse: {
+      type: Array,
+      required: true 
+  },
 
-//   motiveOfCrime: {
-//       type: String, 
-//       required: true
-//   },
+  motiveOfCrime: {
+      type: Array, 
+      required: true
+  },
 
-//   durationOfCrime: {
-//       type: String, 
-//       required: true
-//   },
+  durationOfCrime: {
+      type: Array, 
+      required: true
+  },
 
-//   evidenceLeftBehind: {
-//       type: String,
-//       required: true
-//   },
+  evidenceLeftBehind: {
+      type: Array,
+      required: true
+  },
 
-//   victimsClothes: {
-//       type: String,
-//       required: true
-//   },
+  victimsClothes: {
+      type: Array,
+      required: true
+  },
 
-//   suddenIncident: {
-//       type: String,
-//       required: true
-//   },
+  suddenIncident: {
+      type: Array,
+      required: true
+  },
   
-//   victimsBuild: {
-//       type: String,
-//       required: true 
-//   },
+  victimsBuild: {
+      type: Array,
+      required: true 
+  },
 
-//   victimsExpression: {
-//       type: String,
-//       required: true
-//   },
+  victimsExpression: {
+      type: Array,
+      required: true
+  },
   
   date: {
     type: Date,
