@@ -1,4 +1,5 @@
 import React from 'react';
+import './event_card.css'
 
 class EventCard extends React.Component {
      constructor(props) {
@@ -7,7 +8,7 @@ class EventCard extends React.Component {
 
      render() {
          return (
-             <h1>EventCard</h1>
+             <div className="event-card">Event</div>
          )
      }
 }

@@ -1,0 +1,27 @@
+.event-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    width: 80px;
+    height: 80px;
+    margin: 5px;
+    font-family: 'Girassol', cursive;
+    border-radius: 5px;
+    box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.4);
+}
+
+.event-card:hover {
+    cursor: pointer;
+    background-color: rgb(170, 179, 255);
+    transition: 0.25s;  
+}
+
+.event-card:active {
+    background-color: rgb(18, 51, 235);
+    transition: 0.15s;
+}
+
+.event-card:not( :hover ){ 
+    transition: 0.25s;   
+ }
