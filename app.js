@@ -44,6 +44,7 @@ serv.listen(port, () => { console.log(`Listening on port ${port}`) });
 // serv.listen(3000);
  let io = require('socket.io')(serv,{});
  io.sockets.on('connection',function(socket){
+     
      console.log("Isaac Connected! ~yay");
      socket.on('yay',()=>{
          console.log("Big Yay");
