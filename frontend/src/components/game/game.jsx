@@ -11,32 +11,78 @@ class Game extends React.Component {
      }
 
      render() {
-         return (
-             <div className="game-container">
-                <div className="game-top-row">
-                    <div className="game-player-cards-container">
-                        <Player name="DYLAN"/>
-                        <div className="player-cards-container">
 
-                        </div>
-                    </div>
-                    <div className="game-player-cards-container">
-                        <Player name="CONNOR"/>
-                        <div className="player-cards-container">
-
-                        </div>
-                    </div>
-                    <div className="game-player-cards-container">
-                        <Player name="BRIAN"/>
-                        <div className="player-cards-container">
-
-                        </div>
-                    </div>
+         const cardsContainer = (
+            <div className="player-cards-container">
+                <div className="weapon-cards-container">
+                    <WeaponCard />
+                    <WeaponCard />
+                    <WeaponCard />
+                    <WeaponCard />
                 </div>
-                <div className="game-bottom-row">
-
+                <div className="evidence-cards-container">
+                    <EvidenceCard />
+                    <EvidenceCard />
+                    <EvidenceCard />
+                    <EvidenceCard />
                 </div>
+            </div>
+         )
+
+         const eventCardsContainer = (
+             <div className="event-cards-container">
+                <EventCard />
+                <EventCard />
+                <EventCard />
+                <EventCard />
+                <EventCard />
              </div>
+         )
+         
+         return (
+             <>
+                <div className="game-player-role">
+                    <h1>YOU ARE THE MURDERER</h1>
+                </div>
+                <div className="game-container">
+                    <div className="game-left-column">
+                        <div className="game-player-cards-container">
+                            <Player name="DYLAN"/>
+                            { cardsContainer }
+                        </div>
+                        <div className="game-player-cards-container">
+                            <Player name="CONNOR"/>
+                            { cardsContainer }
+                        </div>
+                        <div className="game-player-cards-container">
+                            <Player name="BRIAN"/>
+                            { cardsContainer }
+                        </div>
+                    </div>
+                    <div className="game-right-column">
+                        <div className="game-event-cards-container">
+                            <h1 className="game-cause-of-death">Cause of Death</h1>
+                            { eventCardsContainer }
+                        </div>
+                        <div className="game-event-cards-container">
+                            <h1 className="game-location">Location</h1>
+                            { eventCardsContainer }
+                        </div>
+                        <div className="game-event-cards-container">
+                            <h1 className="game-victim-identity">Victim's Identity</h1>
+                            { eventCardsContainer }
+                        </div>
+                        <div className="game-event-cards-container">
+                            <h1 className="game-noticed-by-bystander">Noticed by Bystander</h1>
+                            { eventCardsContainer }
+                        </div>
+                        <div className="game-event-cards-container">
+                            <h1 className="game-victim-build">Victim's Build</h1>
+                            { eventCardsContainer }
+                        </div>
+                    </div>
+                </div>
+             </>
          )
      }
 }

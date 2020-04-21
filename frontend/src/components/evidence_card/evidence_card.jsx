@@ -8,7 +8,7 @@ class EvidenceCard extends React.Component {
 
      render() {
          return (
-             <h1>Evidence Card</h1>
+             <div className="evidence-card">E</div>
          )
      }
 }

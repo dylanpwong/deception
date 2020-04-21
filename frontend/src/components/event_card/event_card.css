@@ -1,4 +1,4 @@
-.evidence-card {
+.event-card {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,17 +11,17 @@
     box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.4);
 }
 
-.evidence-card:hover {
+.event-card:hover {
     cursor: pointer;
-    background-color: rgb(184, 255, 184);
+    background-color: rgb(170, 179, 255);
     transition: 0.25s;  
 }
 
-.evidence-card:active {
-    background-color: rgb(27, 192, 12);
+.event-card:active {
+    background-color: rgb(18, 51, 235);
     transition: 0.15s;
 }
 
-.evidence-card:not( :hover ){ 
+.event-card:not( :hover ){ 
     transition: 0.25s;   
  }

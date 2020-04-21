@@ -1,11 +1,72 @@
 .game-container {
     display: flex;
-    flex-direction:column;
-    margin: 0 auto;
-    width: 80%;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 50px auto 0 auto;
+    padding-right: 40px;
+    width: 100%;
+    min-width: 900px;
+    max-width: 1400px;
 }
 
-.game-top-row {
+.game-player-role {
+    font-family: 'Girassol', cursive;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 50px;
+    color: rgb(163, 3, 3);
+}
+
+.game-left-column {
     display: flex;
     flex-direction: column;
+    width: 650px;
+}
+
+.game-player-cards-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    margin-bottom: 50px;
+    align-items: center;
+}
+
+.player-cards-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.weapon-cards-container {
+    display: flex;
+}
+
+.evidence-cards-container {
+    display: flex;
+}
+
+.game-right-column {
+    display: flex;
+    flex-direction: column;
+    width: 550px;
+    padding-top: 70px;
+}
+
+.game-event-cards-container {
+    font-family: 'Girassol', cursive;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.game-event-cards-container h1 {
+    color: rgb(226, 226, 226);
+}
+
+.event-cards-container {
+    display: flex;
 }
