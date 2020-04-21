@@ -11,26 +11,38 @@ class Game extends React.Component {
      }
 
      render() {
+
+         const cardsContainer = (
+            <div className="player-cards-container">
+                <div className="weapon-cards-container">
+                    <WeaponCard />
+                    <WeaponCard />
+                    <WeaponCard />
+                    <WeaponCard />
+                </div>
+                <div className="evidence-cards-container">
+                    <EvidenceCard />
+                    <EvidenceCard />
+                    <EvidenceCard />
+                    <EvidenceCard />
+                </div>
+            </div>
+         )
+         
          return (
              <div className="game-container">
                 <div className="game-top-row">
                     <div className="game-player-cards-container">
                         <Player name="DYLAN"/>
-                        <div className="player-cards-container">
-
-                        </div>
+                        { cardsContainer }
                     </div>
                     <div className="game-player-cards-container">
                         <Player name="CONNOR"/>
-                        <div className="player-cards-container">
-
-                        </div>
+                        { cardsContainer }
                     </div>
                     <div className="game-player-cards-container">
                         <Player name="BRIAN"/>
-                        <div className="player-cards-container">
-
-                        </div>
+                        { cardsContainer }
                     </div>
                 </div>
                 <div className="game-bottom-row">

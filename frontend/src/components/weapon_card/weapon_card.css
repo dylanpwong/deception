@@ -1,4 +1,4 @@
-.evidence-card {
+.weapon-card {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -11,17 +11,17 @@
     box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.4);
 }
 
-.evidence-card:hover {
+.weapon-card:hover {
     cursor: pointer;
-    background-color: rgb(184, 255, 184);
-    transition: 0.25s;  
-}
-
-.evidence-card:active {
-    background-color: rgb(27, 192, 12);
+    background-color: rgb(253, 161, 161);
     transition: 0.15s;
 }
 
-.evidence-card:not( :hover ){ 
-    transition: 0.25s;   
+.weapon-card:active {
+    background-color: rgb(255, 77, 77);
+    transition: 0.15s;
+}
+
+.weapon-card:not( :hover ){ 
+    transition: 0.15s;   
  }
