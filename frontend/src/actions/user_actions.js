@@ -4,7 +4,7 @@ export const RECEIVE_ALL_USERS = "RECEIVE_ALL_USERS";
 export const RECEIVE_USER = "RECEIVE_USER";
 export const RESET_USERS = "RESET_USERS";
 export const CHANGE_USERS = "CHANGE_USERS";
-export const DELETE_USER = "DELETE_USERS";
+export const DELETE_USERS = "DELETE_USERS";
 
 export const receiveAllUsers = users => {
     return {
@@ -40,11 +40,11 @@ export const deleteUsers = () => {
     };
 };
 
-export const signup = userData => dispatch => {
-    return APIUtil.signup(userData).then((res) => {
-        dispatch(receiveUser(res))
-    });
-}
+// export const signup = userData => dispatch => {
+//     return APIUtil.signup(userData).then((res) => {
+//         dispatch(receiveUser(res))
+//     });
+// }
 
 export const createUser = userData => dispatch => {
     return APIUtil.create(userData).then((res) => {
@@ -60,7 +60,7 @@ export const getAllUsers = () => dispatch => {
 
 export const reset = () => dispatch => {
     return APIUtil.reset().then((res) => {
-        dispatch(reserUsers(res))
+        dispatch(resetUsers(res))
     });
 };
 

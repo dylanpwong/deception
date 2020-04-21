@@ -20,8 +20,7 @@ const userSave=(availableRoles)=>{
 }   
 
 router.post('/create',(req,res)=>{
-    // debugger
-
+    console.log("wsup")
     User.find().then((users)=>{
         const user  = new User( {
             username: req.body.username,

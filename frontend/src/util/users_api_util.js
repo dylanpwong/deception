@@ -5,6 +5,7 @@ export const signup = (userData) => {
 };
 
 export const create = (userData) => {
+    // console.log("in Util")
     return axios.post('/api/users/create', userData);
 };
 

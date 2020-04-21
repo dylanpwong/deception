@@ -1,8 +1,8 @@
-import { RECEIVE_ALL_USERS, RECEIVE_USER, RESET_USERS, CHANGE_USERS, DELETE_USER } from '../actions/user_actions';
+import { RECEIVE_ALL_USERS, RECEIVE_USER, RESET_USERS, CHANGE_USERS, DELETE_USERS } from '../actions/user_actions';
 
-const UsersReducer = (state, action) => {
+const UsersReducer = (state = {}, action) => {
     Object.freeze(state);
-    let newState = Object.assign({}, state);
+    // let newState = Object.assign({}, state);
     switch (action.type) {
         case RECEIVE_ALL_USERS:
             return action.users;
@@ -12,7 +12,7 @@ const UsersReducer = (state, action) => {
             return action.users;
         case CHANGE_USERS:
             return action.users;
-        case DELETE_USER:
+        case DELETE_USERS:
             return {};
         default:
             return state;
