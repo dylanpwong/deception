@@ -63,10 +63,10 @@ io.sockets.on('connection',function(socket){
 
         socket.on('playGame', function (data) {
           console.log("playGame1");
-          for (const singleSocket in SOCKET_LIST) {
-                SOCKET_LIST[singleSocket].emit("playGame2",Object.values(SOCKET_LIST).length)
-          }
-        
+        //   for (const singleSocket in SOCKET_LIST) {
+        //         SOCKET_LIST[singleSocket].emit("playGame2",Object.values(SOCKET_LIST).length)
+        //   }
+        io.sockets.emit("playGame2", Object.values(SOCKET_LIST).length);
         //   socket.emit('playGame2');
         });
 
@@ -78,9 +78,11 @@ io.sockets.on('connection',function(socket){
 
         socket.on("updatedPlayersSend",(username)=>{
             console.log(`socket_size: ${Object.values(SOCKET_LIST).length}`)
-             for (const singleSocket in SOCKET_LIST) {
-                SOCKET_LIST[singleSocket].emit("updatedPlayers",username)
-          }
+
+        //      for (const singleSocket in SOCKET_LIST) {
+        //         SOCKET_LIST[singleSocket].emit("updatedPlayers",username)
+        //   }
+            io.sockets.emit("updatedPlayers",username)
         });
         socket.on("getName",function(data){
             socket.emit("recieveName",socket.username);

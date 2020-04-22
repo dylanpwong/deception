@@ -7,3 +7,7 @@ export const index = () => {
 export const start = () => {
     return axios.get('/api/cards/start');
 };
+
+export const getHands=()=>{
+    return axios.get('/api/cards/getHand')
+}

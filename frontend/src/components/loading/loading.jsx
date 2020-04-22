@@ -49,11 +49,12 @@ class Loading extends React.Component {
         // debugger
         e.preventDefault();
         console.log("in Play Game!!!")
-        socket.emit("playGame3");
+        socket.emit("playGame");
         socket.on("playGame2", (data) => {
-            console.log("recieved playGame2")
-            console.log(data);
-            this.props.history.push('/game')
+                console.log("recieved playGame2")
+                console.log(data);
+                this.props.history.push('/game')
+        
         })
         
     }

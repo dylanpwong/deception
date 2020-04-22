@@ -10,7 +10,8 @@ const mapStateToProps = state => {
        return {
          users: Object.values(state.users),
          cards: Object.values(state.cards),
-         event: Object.values(state.events)
+         event: Object.values(state.events),
+         currentUser: state.currentUser
        };
      } else {
        return {};

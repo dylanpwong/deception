@@ -17,6 +17,12 @@ export const receiveAll = all => {
     };
 };
 
+export const getHands = () =>{
+    return APIUtil.getHands().then((res)=>{
+        return dispatch(receiveCards(res))
+    })
+}
+
 export const getCards = () => dispatch => {
     return APIUtil.index().then((res) => {
         dispatch(receiveCards(res))

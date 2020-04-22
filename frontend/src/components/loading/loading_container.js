@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Loading from "./loading";
-import { getAllUsers } from '../../actions/user_actions';
+import { getAllUsers, updateUsers } from '../../actions/user_actions';
 
 const mapStateToProps = state => {
     // debugger
@@ -15,7 +15,8 @@ const mapStateToProps = state => {
 
 
 const mapDispatchToProps = dispatch => ({
-    fetchUsers: () => dispatch(getAllUsers())
+    fetchUsers: () => dispatch(getAllUsers()),
+    updateUsers: () => dispatch(updateUsers())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Loading);
