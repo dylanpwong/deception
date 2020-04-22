@@ -1,4 +1,4 @@
-import { RECEIVE_CARDS } from '../actions/card_actions';
+import { RECEIVE_CARDS, RECEIVE_ALL } from '../actions/card_actions';
 
 const CardsReducer = (state = {}, action) => {
     Object.freeze(state);
@@ -6,6 +6,8 @@ const CardsReducer = (state = {}, action) => {
     switch (action.type) {
         case RECEIVE_CARDS:
             return action.cards;
+        case RECEIVE_ALL: 
+            return action.all.cards
         default:
             return state;
     }

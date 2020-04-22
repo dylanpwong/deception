@@ -1,4 +1,5 @@
 import { RECEIVE_ALL_USERS, RECEIVE_USER, RESET_USERS, CHANGE_USERS, DELETE_USERS } from '../actions/user_actions';
+import { RECEIVE_ALL } from '../actions/card_actions';
 
 const UsersReducer = (state = {}, action) => {
     Object.freeze(state);
@@ -14,6 +15,8 @@ const UsersReducer = (state = {}, action) => {
             return action.users;
         case DELETE_USERS:
             return {};
+        case RECEIVE_ALL: 
+            return action.all.users;
         default:
             return state;
     }

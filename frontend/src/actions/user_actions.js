@@ -5,6 +5,14 @@ export const RECEIVE_USER = "RECEIVE_USER";
 export const RESET_USERS = "RESET_USERS";
 export const CHANGE_USERS = "CHANGE_USERS";
 export const DELETE_USERS = "DELETE_USERS";
+export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
+
+export const receiveCurrentUser = user => {
+    return {
+        type: RECEIVE_CURRENT_USER,
+        user: user
+    }
+}
 
 export const receiveAllUsers = users => {
     return {
@@ -48,13 +56,13 @@ export const deleteUsers = () => {
 
 export const createUser = userData => dispatch => {
     return APIUtil.create(userData).then((res) => {
-        dispatch(receiveUser(res))
+       return dispatch(receiveUser(res))
     });
 }
 
 export const getAllUsers = () => dispatch => {
     return APIUtil.index().then((res) => {
-        dispatch(receiveAllUsers(res))
+       return dispatch(receiveAllUsers(res))
     });
 };
 
@@ -66,7 +74,7 @@ export const reset = () => dispatch => {
 
 export const updateUsers = () => dispatch => {
     return APIUtil.roles().then((res) => {
-        dispatch(changeUsers(res))
+       return dispatch(changeUsers(res))
     });
 };
 

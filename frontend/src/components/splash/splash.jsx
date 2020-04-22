@@ -1,13 +1,15 @@
 import React from 'react';
 import './splash.css';
 import { Link } from 'react-router-dom';
-
+import openSocket from 'socket.io-client';
+const socket = openSocket("http://localhost:3000/#/");
 class Splash extends React.Component {
 
     constructor (props) {
         super(props);
         this.state = {
             username: '',
+            // socket: openSocket(this.props.location.pathname)/*{transports: ["websocket"]})*/
         }
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -17,7 +19,18 @@ class Splash extends React.Component {
     }
 
     handleSubmit(e) {
-        this.props.createUser(this.state).then(() => console.log("broken"))
+        e.preventDefault();
+        // debugger
+        // this.state.socket.emit("newUser",this.state.username);
+        // this.state.socket.emit("")
+        let user = {
+            username: this.state.username
+        }
+        socket.emit("updatedPlayersSend",user);
+        this.props.createUser(user).then((res) => {
+            
+           return this.props.history.push('/loading')
+        })
     }
 
     render() {

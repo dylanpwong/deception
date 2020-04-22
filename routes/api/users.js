@@ -20,7 +20,7 @@ const userSave=(availableRoles)=>{
 }   
 
 router.post('/create',(req,res)=>{
-    console.log("wsup")
+    // console.log(`req: ${req.body}`)
     User.find().then((users)=>{
         const user  = new User( {
             username: req.body.username,
@@ -55,32 +55,16 @@ router.patch('/roles',(req,res)=>{
         while (rand1 === rand2 ) {
             rand2 = Math.floor(Math.random() * usersArray.length) + 1;
         }
-        // User;
-        // debugger
+
         User.updateOne({player: rand1},{role: "Murderer"}).then((user1)=>{
             User.updateOne({player: rand2},{role: "Scientist"}).then((user2)=>{
-                res.json(user2)
+                User.find().then((users)=>{
+                    res.json(users)
+                })
             })
         })
         
-        // let availableRoles=["Murderer","Scientist"];
-        // let changed = 0;
-        // User.updateOne({player: 2},{role: "Investigator"}).then((user)=>res.json(user));
-        // debugger
-        // while(changed < 2) {
-        //     // console.log("inside!")
-        //     if(usersArray[rand].role === "Investigator"){
-        //         usersArray[rand].role = availableRoles[changed];
-        //         User.updateOne({player: 2},{role: "Investigator"}).then((user)=>res.json(user));
-        //         changed +=1;
-        //     }
-        //     rand = Math.floor(Math.random() * usersArray.length);
-        // }
         
-        // User.updateMany({player: {$gte: rand},{role: }})
-        // users.updateMany();
-        // User.update({role: ""},{role: ""})
-        // User.update({username: X}, {role: "Murderer"})
     }).catch((err)=>{
         res.status(400).json(err);
     })

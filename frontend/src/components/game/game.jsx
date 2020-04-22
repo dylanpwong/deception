@@ -4,14 +4,59 @@ import EvidenceCard from '../evidence_card/evidence_card_container';
 import EventCard from '../event_card/event_card_container';
 import Player from '../player/player_container';
 import './game.css';
-
+// import openSocket from 'socket.io-client';
 class Game extends React.Component {
      constructor(props) {
          super(props);
+         this.state = {
+        //    socket: openSocket(this.props.location.pathname)
+         };
+         this.getName = this.getName.bind(this)
+     }
+
+
+     getName(){
+        //  let myName;
+        //  this.state.socket.emit('getName');
+        //  this.state.socket.on('recieveName',function(data){
+        //      myName = data;
+        //  });
+        //  console.log(`myName: ${myName}`)
+        //  return myName;
+     }
+
+     shuffle() {
+         let weaponCards = this.props.cards.split(0, (this.props.cards.length / 2));
+         let evidenceCards = this.props.cards.split(this.props.cards.length / 2);
+         let playerCards = [];
+         for (let i = 0; i < 4; i++) {
+            let randomWeapon = Math.floor(Math.random() * weaponCards.length);
+            let randomEvidence = Math.floor(Math.random() + evidenceCards.length);
+            playerCards.push(weaponCards[randomWeapon], evidenceCards[randomEvidence]);
+            weaponCards.splice(randomWeapon,1);
+            evidenceCards.splice(randomEvidence,1);
+         }
+         return playerCards;
+     }
+
+     componentDidMount() {
+        this.props.fetchAll().then((res)=>{
+            // debugger
+        });
+            // debugger
+
+      
      }
 
      render() {
-
+         
+        if (this.props.users === undefined || this.props.cards === undefined) {
+            return (
+                <>
+                </>
+            )
+        }
+        
          const cardsContainer = (
             <div className="player-cards-container">
                 <div className="weapon-cards-container">
@@ -42,6 +87,7 @@ class Game extends React.Component {
          return (
              <>
                 <div className="game-player-role">
+                    {/* {this.getName()} */}
                     <h1>YOU ARE THE MURDERER</h1>
                 </div>
                 <div className="game-container">
