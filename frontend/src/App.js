@@ -5,8 +5,8 @@ import SplashContainer from './components/splash/splash_container';
 import LoadingContainer from './components/loading/loading_container';
 import GameContainer from './components/game/game_container';
 import openSocket from 'socket.io-client';
-// const socket = openSocket("http://localhost:3000/#/");
-const socket = openSocket("https://deception.herokuapp.com/");
+const socket = openSocket("http://localhost:3000/#/");
+// const socket = openSocket("https://deception.herokuapp.com/");
 function transferToGamePage(){
   socket.on("playGame2",()=>{
 
