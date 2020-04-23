@@ -67,3 +67,24 @@
     background-color: rgb(165, 11, 5);
     transition: 0.25s;
 }
+
+.not-active {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 31px;
+    font-family: 'Girassol', cursive;
+    font-size: 30.5px;
+    width: 120px;
+    height: 40px;
+    outline: none !important;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.22);
+    opacity: 0.3;
+  }

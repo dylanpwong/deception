@@ -8,6 +8,10 @@ export const start = () => {
     return axios.get('/api/cards/start');
 };
 
-export const getHands=()=>{
+export const getHands = () => {
     return axios.get('/api/cards/getHands')
+}
+
+export const dealHands = () => {
+    return axios.post('api/cards/dealHand')
 }

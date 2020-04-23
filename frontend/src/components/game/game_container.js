@@ -1,8 +1,9 @@
 import Game from "./game";
 import { connect } from 'react-redux';
-import { getAllUsers, updateUsers } from "../../actions/user_actions";
+import {  updateUsers } from "../../actions/user_actions";
 import { getAll, getCards, getHands } from '../../actions/card_actions';
 import { getEvent } from '../../actions/event_actions';
+import { openModal, closeModal } from '../../actions/modal_actions';
 
 const mapStateToProps = state => {
      if (Object.values(state.cards).length > 0) {
@@ -24,7 +25,9 @@ const mapDispatchToProps = dispatch => ({
     updateUsers: () => dispatch(updateUsers()),
     fetchCards: () => dispatch(getCards()),
     fetchEvent: () => dispatch(getEvent()),
-    getHands: ()=>dispatch(getHands())
+    getHands: ()=>dispatch(getHands()),
+    openModal: () => dispatch(openModal()),
+    closeModal: () => dispatch(closeModal())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

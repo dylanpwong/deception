@@ -24,35 +24,30 @@ const shuffle = (cards) => {
             }
         return playerCards;
 }
+// router.delete("/gameOver", (req, res) => {
+//   User.deleteMany({}).then((user) => res.json(user));
+// });
 
 router.post('/dealHand',(req,res)=>{
-    
-    Card.find({}).then(cardsObj => {
-       let cardArr = Object.values(cardsObj);
-       let hand1 =  shuffle(cardArr);
-       
-        let hand2 = shuffle(cardArr);
-        let hand3 = shuffle(cardArr);
-        let hand4 = shuffle(cardArr);
-       let playersHand = new ShuffledCard({
-           player1: hand1,
-           player2: hand2,
-           player3: hand3,
-           player4: hand4
-       })
-        playersHand.save().then((shuffled) => res.json(shuffled))
-                .catch((err) => console.log(err));
-       res.json(playersHand);
+    ShuffledCard.deleteMany({}).then(() => {
+        Card.find({}).then(cardsObj => {
+        let cardArr = Object.values(cardsObj);
+        let hand1 =  shuffle(cardArr);
+            let hand2 = shuffle(cardArr);
+            let hand3 = shuffle(cardArr);
+            let hand4 = shuffle(cardArr);
+        let playersHand = new ShuffledCard({
+            player1: hand1,
+            player2: hand2,
+            player3: hand3,
+            player4: hand4
+        })
+            playersHand.save().then((shuffled) => res.json(shuffled))
+                    .catch((err) => console.log(err));
+        res.json(playersHand);
+        })
     })
-        
-
-    })
-    
-    // const hands = {
-    //     player1: hand1,
-    //     player2:
-    // }
-
+})
 
 router.get('/start', (req, res) => {
     ShuffledCard.find({}).then((cards) => {

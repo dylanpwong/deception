@@ -26,5 +26,5 @@ const ShuffledCardSchema = new Schema({
   },
 });
 
-const ShuffledCard= mongoose.model("shuffledcards", ShuffledCardSchema);
+const ShuffledCard = mongoose.model("shuffledcards", ShuffledCardSchema);
 module.exports = ShuffledCard;

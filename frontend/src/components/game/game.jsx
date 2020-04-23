@@ -9,13 +9,21 @@ class Game extends React.Component {
      constructor(props) {
          super(props);
          this.state = {
+             Mcount: 0,
+             Icount:0
         //    socket: openSocket(this.props.location.pathname)
          };
-         this.getName = this.getName.bind(this)
+         this.getName = this.getName.bind(this);
+         this.gameListenerForMS = this.gameListenerForMS.bind(this);
+         this.gameListenerForInv = this.gameListenerForInv.bind(this);
+         this.gameStart = this.gameStart.bind(this);
+         this.murderPick = this.murderPick.bind(this);
+         this.scientistPick = this.scientistPick.bind(this);
+         this.investigatorPick = this.investigatorPick.bind(this);
      }
 
 
-     getName(){
+     getName() {
         //  let myName;
         //  this.state.socket.emit('getName');
         //  this.state.socket.on('recieveName',function(data){
@@ -35,36 +43,117 @@ class Game extends React.Component {
       
      }
 
+     murderPick(event){ //on click
+        if (this.state.Mcount < 2) {
+            let target = event.target;
+            this.props.socket.emit("MurderPick", target);
+            this.state.Mcount += 1;
+            if (this.state.Mcount === 2) {
+                this.props.socket.emit("MurderPhaseOver")
+            }
+        } else {//normal stuff
+
+        }
+     }
+
+     scientistPick(event){
+         let target = event.target;
+
+         if (target.classList["ScientistPick"]){
+            target.classList.remove("ScientistPick");
+         } else {
+            target.classList.add("ScientistPick"); //should change to blue
+         }
+     }
+     
+     investigatorPick(event){
+        let target = event.target;
+        if(this.state.Icount < 2){
+            target.classList.add("InvestigatorPick"); // class that turns it green
+            this.state.Icount += 1;
+        }
+     }
+
+     playersOnClick(event){
+        let role = this.props.users[this.props.currentUser.username].role;
+
+        switch(role){
+            case "Murderer":
+                return this.murderPick;
+            case "Scientist":
+                return this.scientistPick;
+            default:
+                return this.investigatorPick;
+        }
+     }
+
+     gameStart(){
+         this.props.socket.emit("GameStart");
+     }
+
+     gameListenerForMS() {
+        let role = this.props.users[this.props.currentUser.username].role;
+        if (role === 'Murderer' || role === 'Scientist') {
+            this.props.socket.on("MurderPhase", (target) => {
+                target.classList.add('MurderPick')
+            })  
+        }
+     }
+     
+     gameListenerForInv() {
+         let role = this.props.users[this.props.currentUser.username].role;
+         if (role === 'Investigator') {
+             this.props.socket.on("RoundStart", () => {//open Model
+                this.props.openModal();
+             });
+             this.props.socket.on("RoundEnd", () => { //Murderer picked 2 close model
+                this.props.closeModal();
+             });
+         }
+     }
+
+     gameTest(){
+         this.props.socket.on("RoundStart",()=>{
+             this.props.openModal();
+         })
+     }
+
      render() {
-         
-        if (this.props.users === undefined || this.props.cards === undefined) {
+         if (this.props.users === undefined || this.props.cards === undefined) {
             return (
                 <>
                 </>
             )
         }
+        // {this.gameListenerForInv()}
+        {this.gameTest.bind(this)()}
+        {this.gameStart()}
+        // {this.gameListenerForMS()}
+        // debugger
         const playerCards = this.props.cards.map((ele,idx)=>{
             // console.log(`ele: ${ele}`)
             // debugger
-            let player = `player${idx + 1}`
+            // let player = `player${idx + 1}`
+            // debugger
             const cardsContainer = (
                <div className="player-cards-container">
                    <div className="weapon-cards-container">
-                       <WeaponCard card={ele[0]}/>
-                       <WeaponCard card={ele[2]}/>
-                       <WeaponCard card={ele[4]}/>
-                       <WeaponCard card={ele[6]}/>
+                       <WeaponCard key={Math.random()} card={ele[0]}/>
+                       <WeaponCard key={Math.random()} card={ele[2]}/>
+                       <WeaponCard key={Math.random()} card={ele[4]}/>
+                       <WeaponCard key={Math.random()} card={ele[6]}/>
                    </div>
                    <div className="evidence-cards-container">
-                       <EvidenceCard card={ele[1]}/>
-                       <EvidenceCard card={ele[3]}/>
-                       <EvidenceCard card={ele[5]}/>
-                       <EvidenceCard card={ele[7]}/>
+                       <EvidenceCard key={Math.random()}  card={ele[1]}/>
+                       <EvidenceCard key={Math.random()}  card={ele[3]}/>
+                       <EvidenceCard key={Math.random()}  card={ele[5]}/>
+                       <EvidenceCard key={Math.random()}  card={ele[7]}/>
                    </div>
                </div>
             )
             return cardsContainer;
         })
+        // debugger
         console.log(`playerCards: ${playerCards.length}`)
          const eventCardsContainer = (
              <div className="event-cards-container">
@@ -75,6 +164,18 @@ class Game extends React.Component {
                 <EventCard />
              </div>
          )
+
+         const players = [];
+         let i = 0;
+         for (let user in this.props.users) {
+             players.push(
+             <div key={i} className="game-player-cards-container">
+                <Player name={user}/>
+                { playerCards[i] }
+            </div>
+            )
+            i++;
+         }
          
          return (
              <>
@@ -84,18 +185,7 @@ class Game extends React.Component {
                 </div>
                 <div className="game-container">
                     <div className="game-left-column">
-                        <div className="game-player-cards-container">
-                            <Player name="DYLAN"/>
-                            { playerCards[0] }
-                        </div>
-                        <div className="game-player-cards-container">
-                            <Player name="CONNOR"/>
-                            { playerCards[1] }
-                        </div>
-                        <div className="game-player-cards-container">
-                            <Player name="BRIAN"/>
-                            { playerCards[2] }
-                        </div>
+                        {players}
                     </div>
                     <div className="game-right-column">
                         <div className="game-event-cards-container">

@@ -1,4 +1,4 @@
-import { RECEIVE_ALL_USERS, RECEIVE_USER, RESET_USERS, CHANGE_USERS, DELETE_USERS } from '../actions/user_actions';
+import { RECEIVE_ALL_USERS, RECEIVE_USER, RESET_USERS, CHANGE_USERS, DELETE_USERS, GAME_OVER } from '../actions/user_actions';
 import { RECEIVE_ALL } from '../actions/card_actions';
 
 const UsersReducer = (state = {}, action) => {
@@ -21,8 +21,10 @@ const UsersReducer = (state = {}, action) => {
             return updatedUsers;
         case DELETE_USERS:
             return {};
+        case GAME_OVER:
+            return {};
         case RECEIVE_ALL: 
-             let newState2={};
+            let newState2={};
             action.all.users.forEach(user => {
                 newState2[user.username] = user
             });

@@ -4,17 +4,19 @@ import { Route, Switch } from 'react-router-dom';
 import SplashContainer from './components/splash/splash_container';
 import LoadingContainer from './components/loading/loading_container';
 import GameContainer from './components/game/game_container';
+import Modal from './components/modal.jsx';
 import openSocket from 'socket.io-client';
 const socket = openSocket("http://localhost:3000/#/");
 // const socket = openSocket("https://deception.herokuapp.com/");
-function transferToGamePage(){
-  socket.on("playGame2",()=>{
+// function transferToGamePage() {
+//   socket.on("playGame2", () => {
 
-  })
-}
+//   })
+// }
 function App() {
   return (
     <div className="App">
+      <Modal />
       <Switch>
         {/* <Route exact path="/game" component={GameContainer} /> */}
         {/* <Route exact path="/loading" component={LoadingContainer} /> */}

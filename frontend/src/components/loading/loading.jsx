@@ -51,7 +51,9 @@ class Loading extends React.Component {
         e.preventDefault();
         console.log("in Play Game!!!")
         this.props.socket.emit("playGame");
-        this.props.updateUsers();
+        this.props.updateUsers().then(() => {
+            
+        })
         // this.props.socket.on("playGame2", (data) => {
         //         console.log("recieved playGame2")
         //         console.log(data);
@@ -63,7 +65,10 @@ class Loading extends React.Component {
 
     gameListener(){
         this.props.socket.on('playGame2',()=>{
-            this.props.history.push('/game')
+            this.props.dealCards().then((res)=>{
+
+                this.props.history.push('/game')
+            })
         })
     }
 
@@ -90,6 +95,12 @@ class Loading extends React.Component {
               </div>
             );
         });
+        let buttonClass;
+        if (this.state.players.length < 2) {
+            buttonClass = 'not-active';
+        } else {
+            buttonClass = 'loading-play-button'
+        }
         return (
             <div className="loading-container">
                 <Link className="game-title" to="/">DECEPTION</Link>
@@ -115,7 +126,7 @@ class Loading extends React.Component {
                         </div> */}
                     </div>
 
-                    <Link onClick={this.playGame}to="/game" className="loading-play-button">
+                    <Link onClick={this.playGame}to="/game" className={buttonClass}>
                         <h1>PLAY</h1>
                     </Link>
                 </div>

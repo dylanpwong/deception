@@ -38,8 +38,9 @@ class Splash extends React.Component {
             <div className="splash-container">
                 <Link className="game-title" to="/">DECEPTION</Link>
                 <div className="splash-form">
+                    <button onClick={this.props.endGame}>FIX</button>
                     <h1>Enter a username</h1>
-                    
+
                         <input onChange={this.update()} className="splash-input-username" value={this.state.username} type="text" placeholder="Bob Jenkins"/>    
                         <Link onClick={this.handleSubmit} className="splash-play-button" to="/loading">Ready</Link>
                 </div>

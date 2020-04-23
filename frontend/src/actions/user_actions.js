@@ -6,6 +6,7 @@ export const RESET_USERS = "RESET_USERS";
 export const CHANGE_USERS = "CHANGE_USERS";
 export const DELETE_USERS = "DELETE_USERS";
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
+export const GAME_OVER = "GAME_OVER";
 
 export const receiveCurrentUser = user => {
     return {
@@ -48,6 +49,12 @@ export const deleteUsers = () => {
     };
 };
 
+export const gameOver = () => {
+    return {
+        type: GAME_OVER
+    };
+};
+
 // export const signup = userData => dispatch => {
 //     return APIUtil.signup(userData).then((res) => {
 //         dispatch(receiveUser(res))
@@ -81,5 +88,11 @@ export const updateUsers = () => dispatch => {
 export const deleteUser = () => dispatch => {
     return APIUtil.deleteUser().then(() => {
         dispatch(deleteUsers())
+    });
+};
+
+export const endGame = () => dispatch => {
+    return APIUtil.gameOver().then(() => {
+        dispatch(gameOver())
     });
 };

@@ -55,10 +55,10 @@ io.sockets.on('connection',function(socket){
         socket.username = "";
         SOCKET_LIST[socket.id] = socket;
 
-        socket.on('newUser',function(data){
+        socket.on('newUser', function(data) {
             // socket.username = data;
             // console.log(socket.username);
-            socket.emit("updatedUsers",data)
+            socket.emit("updatedUsers", data)
         })
 
         socket.on('playGame', function (data) {
@@ -70,25 +70,37 @@ io.sockets.on('connection',function(socket){
         //   socket.emit('playGame2');
         });
 
+        socket.on("MurderPick", (target) => {
+            io.sockets.emit("MurderPhase", target);
+        });
+
+        socket.on("GameStart", () => {
+            io.sockets.emit("RoundStart");
+        })
+
+        socket.on("MurderPhaseOver", () => {
+            io.sockets.emit("RoundEnd");
+        });
+
         // socket.on('playGame3', function(data,cb){
         //     for (const singleSocket in SOCKET_LIST) {
         //         SOCKET_LIST[singleSocket].emit("playGame2",Object.values(SOCKET_LIST).length)
         //   }
         // })
 
-        socket.on("updatedPlayersSend",(username)=>{
+        socket.on("updatedPlayersSend",(username) => {
             console.log(`socket_size: ${Object.values(SOCKET_LIST).length}`)
 
         //      for (const singleSocket in SOCKET_LIST) {
         //         SOCKET_LIST[singleSocket].emit("updatedPlayers",username)
         //   }
-            io.sockets.emit("updatedPlayers",username)
+            io.sockets.emit("updatedPlayers", username)
         });
         socket.on("getName",function(data){
-            socket.emit("recieveName",socket.username);
+            socket.emit("recieveName", socket.username);
         })
 
-        socket.on('disconnect',function(){
+        socket.on('disconnect', function() {
             delete SOCKET_LIST[socket.id]
         })
 

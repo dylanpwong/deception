@@ -24,3 +24,7 @@ export const roles = () => {
 export const deleteUser = () => {
     return axios.delete('/api/users/delete');
 };
+
+export const gameOver = () => {
+    return axios.delete('/api/users/gameover');
+};
