@@ -11,7 +11,6 @@ const CardsReducer = (state = {}, action) => {
             for(const ele in action.all.cards[0]){
                 cards[ele] = action.all.cards[0][ele];
             }
-                
             
             return cards
         default:
