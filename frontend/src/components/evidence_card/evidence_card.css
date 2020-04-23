@@ -25,3 +25,7 @@
 .evidence-card:not( :hover ){ 
     transition: 0.25s;   
  }
+
+ .murderPick {
+    background-color: red;
+}

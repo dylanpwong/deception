@@ -8,7 +8,7 @@ class EventCard extends React.Component {
 
      render() {
          return (
-             <div className="event-card">Event</div>
+            <div id={this.props.id} onClick={this.props.playersOnClick}  className="event-card">{this.props.event}</div>
          )
      }
 }

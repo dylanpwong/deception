@@ -25,3 +25,7 @@
 .event-card:not( :hover ){ 
     transition: 0.25s;   
  }
+
+.turnBlue {
+    background-color:teal;
+}

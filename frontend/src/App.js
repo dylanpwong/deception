@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import SplashContainer from './components/splash/splash_container';
 import LoadingContainer from './components/loading/loading_container';
 import GameContainer from './components/game/game_container';
-import Modal from './components/modal.jsx';
+import Modal from './components/modal/modal.jsx';
 import openSocket from 'socket.io-client';
 const socket = openSocket("http://localhost:3000/#/");
 // const socket = openSocket("https://deception.herokuapp.com/");

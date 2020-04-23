@@ -1,0 +1,28 @@
+.modal-background {
+  position: absolute;
+  transform: translate(-0%, -0%);
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+}
+
+
+.modal-child {
+  /* position: absolute; */
+  /* transform: translate(-50%, -50%); */
+  position: relative;
+  width: 500px;
+  background-color: #292929;
+  border: 1px solid #444;
+  border-radius: 2px;
+  top: 10%;
+}
+
+.modal-child > h1 {
+    color: white;
+}

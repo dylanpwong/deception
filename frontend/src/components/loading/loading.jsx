@@ -50,9 +50,10 @@ class Loading extends React.Component {
         // debugger
         e.preventDefault();
         console.log("in Play Game!!!")
-        this.props.socket.emit("playGame");
         this.props.updateUsers().then(() => {
-            
+            this.props.dealCards().then((res)=>{
+                this.props.socket.emit("playGame");
+             });
         })
         // this.props.socket.on("playGame2", (data) => {
         //         console.log("recieved playGame2")
@@ -65,11 +66,11 @@ class Loading extends React.Component {
 
     gameListener(){
         this.props.socket.on('playGame2',()=>{
-            this.props.dealCards().then((res)=>{
+            // this.props.dealCards().then((res)=>{
 
                 this.props.history.push('/game')
             })
-        })
+        // })
     }
 
     componentDidMount() {

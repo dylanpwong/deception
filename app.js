@@ -71,7 +71,8 @@ io.sockets.on('connection',function(socket){
         });
 
         socket.on("MurderPick", (target) => {
-            io.sockets.emit("MurderPhase", target);
+            // console.log("backendMurder")
+            io.sockets.emit("MurderPhase",target);
         });
 
         socket.on("GameStart", () => {
@@ -79,8 +80,13 @@ io.sockets.on('connection',function(socket){
         })
 
         socket.on("MurderPhaseOver", () => {
+            console.log("murderPhaseDone")
             io.sockets.emit("RoundEnd");
         });
+
+        socket.on("scientistPick",target=>{
+            io.sockets.emit("scientistChoose",target);
+        })
 
         // socket.on('playGame3', function(data,cb){
         //     for (const singleSocket in SOCKET_LIST) {

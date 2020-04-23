@@ -10,7 +10,8 @@ class Game extends React.Component {
          super(props);
          this.state = {
              Mcount: 0,
-             Icount:0
+             Icount:0,
+             gameStarted: false
         //    socket: openSocket(this.props.location.pathname)
          };
          this.getName = this.getName.bind(this);
@@ -20,6 +21,9 @@ class Game extends React.Component {
          this.murderPick = this.murderPick.bind(this);
          this.scientistPick = this.scientistPick.bind(this);
          this.investigatorPick = this.investigatorPick.bind(this);
+         this.playersOnClick = this.playersOnClick.bind(this);
+         this.gameListenerClose=this.gameListenerClose.bind(this);
+         this.allListen = this.allListen.bind(this);
      }
 
 
@@ -44,12 +48,23 @@ class Game extends React.Component {
      }
 
      murderPick(event){ //on click
+        console.log("MurderPicked!");
         if (this.state.Mcount < 2) {
-            let target = event.target;
-            this.props.socket.emit("MurderPick", target);
+            let target = event.target.getAttribute('id');
+            // debugger;
+            // target.classList.add("murderPickFind");
+            // debugger;
+            // this.props.socket.binaryType = 'arrayBuffer';
+
+            let changeClass = function(){
+                console.log("Inside listner for murder click");
+                target.classList.add("murderPick");
+            }
+            this.props.socket.emit("MurderPick",target);
             this.state.Mcount += 1;
+            console.log(`Mcount: ${this.state.Mcount}`)
             if (this.state.Mcount === 2) {
-                this.props.socket.emit("MurderPhaseOver")
+                this.props.socket.emit("MurderPhaseOver");
             }
         } else {//normal stuff
 
@@ -57,19 +72,15 @@ class Game extends React.Component {
      }
 
      scientistPick(event){
-         let target = event.target;
-
-         if (target.classList["ScientistPick"]){
-            target.classList.remove("ScientistPick");
-         } else {
-            target.classList.add("ScientistPick"); //should change to blue
-         }
+         let target = event.target.getAttribute("id");
+        
+        this.props.socket.emit("scientistPick",target)
      }
      
      investigatorPick(event){
         let target = event.target;
         if(this.state.Icount < 2){
-            target.classList.add("InvestigatorPick"); // class that turns it green
+            target.classList.add("InvestigatorPick"); // class that turns itRoundEnd green
             this.state.Icount += 1;
         }
      }
@@ -81,21 +92,26 @@ class Game extends React.Component {
             case "Murderer":
                 return this.murderPick;
             case "Scientist":
-                return this.scientistPick;
+                return null;
             default:
                 return this.investigatorPick;
         }
      }
 
-     gameStart(){
-         this.props.socket.emit("GameStart");
+     gameStart(gameStarted){
+         if(!gameStarted){
+            this.props.socket.emit("GameStart");
+         }
      }
 
      gameListenerForMS() {
         let role = this.props.users[this.props.currentUser.username].role;
         if (role === 'Murderer' || role === 'Scientist') {
             this.props.socket.on("MurderPhase", (target) => {
-                target.classList.add('MurderPick')
+                 let targetEle = document.getElementById(target);
+                console.log("Inside lstner for murder click");
+                targetEle.classList.add("murderPick");
+                
             })  
         }
      }
@@ -106,7 +122,19 @@ class Game extends React.Component {
              this.props.socket.on("RoundStart", () => {//open Model
                 this.props.openModal();
              });
-             this.props.socket.on("RoundEnd", () => { //Murderer picked 2 close model
+            //  this.props.socket.on("RoundEnd", () => { //Murderer picked 2 close model
+            //     console.log("MurderPhase Over!")
+            //     this.props.closeModal();
+            //  });
+         }
+     }
+
+     gameListenerClose(){
+         let role = this.props.users[this.props.currentUser.username].role;
+         if (role === 'Investigator') {
+              this.props.socket.on("RoundEnd", () => { //Murderer picked 2 close model
+                console.log("MurderPhase Over!");
+                this.state.gameStarted = true;
                 this.props.closeModal();
              });
          }
@@ -118,6 +146,14 @@ class Game extends React.Component {
          })
      }
 
+     allListen(){
+        this.props.socket.on("scientistChoose",(target)=>{
+            // debugger
+            let targetEle = document.getElementById(target);
+            targetEle.classList.add("turnBlue");
+        });
+     }
+
      render() {
          if (this.props.users === undefined || this.props.cards === undefined) {
             return (
@@ -125,10 +161,13 @@ class Game extends React.Component {
                 </>
             )
         }
-        // {this.gameListenerForInv()}
-        {this.gameTest.bind(this)()}
-        {this.gameStart()}
-        // {this.gameListenerForMS()}
+
+        {this.gameListenerForInv()}
+        {this.gameListenerClose()}
+        {this.allListen()}
+        // {this.gameTest.bind(this)()}
+        {this.gameListenerForMS()}
+        {this.gameStart(this.state.gameStarted)}
         // debugger
         const playerCards = this.props.cards.map((ele,idx)=>{
             // console.log(`ele: ${ele}`)
@@ -138,44 +177,69 @@ class Game extends React.Component {
             const cardsContainer = (
                <div className="player-cards-container">
                    <div className="weapon-cards-container">
-                       <WeaponCard key={Math.random()} card={ele[0]}/>
-                       <WeaponCard key={Math.random()} card={ele[2]}/>
-                       <WeaponCard key={Math.random()} card={ele[4]}/>
-                       <WeaponCard key={Math.random()} card={ele[6]}/>
+                       <WeaponCard playersOnClick={this.playersOnClick()} key={Math.random()} card={ele[0]}/>
+                       <WeaponCard playersOnClick={this.playersOnClick()} key={Math.random()} card={ele[2]}/>
+                       <WeaponCard playersOnClick={this.playersOnClick()} key={Math.random()} card={ele[4]}/>
+                       <WeaponCard playersOnClick={this.playersOnClick()} key={Math.random()} card={ele[6]}/>
                    </div>
                    <div className="evidence-cards-container">
-                       <EvidenceCard key={Math.random()}  card={ele[1]}/>
-                       <EvidenceCard key={Math.random()}  card={ele[3]}/>
-                       <EvidenceCard key={Math.random()}  card={ele[5]}/>
-                       <EvidenceCard key={Math.random()}  card={ele[7]}/>
+                       <EvidenceCard playersOnClick={this.playersOnClick()} key={Math.random()}  card={ele[1]}/>
+                       <EvidenceCard playersOnClick={this.playersOnClick()} key={Math.random()}  card={ele[3]}/>
+                       <EvidenceCard playersOnClick={this.playersOnClick()} key={Math.random()}  card={ele[5]}/>
+                       <EvidenceCard playersOnClick={this.playersOnClick()} key={Math.random()}  card={ele[7]}/>
                    </div>
                </div>
             )
             return cardsContainer;
         })
         // debugger
+        let role = this.props.users[this.props.currentUser.username].role;
         console.log(`playerCards: ${playerCards.length}`)
-         const eventCardsContainer = (
-             <div className="event-cards-container">
-                <EventCard />
-                <EventCard />
-                <EventCard />
-                <EventCard />
-                <EventCard />
-             </div>
-         )
-
+        //  const eventCardsContainer = (
+        //      <div className="event-cards-container">
+        //         <EventCard playersOnClick={(role == "Scientist") ? this.scientistPick : null}/>
+        //         <EventCard playersOnClick={(role == "Scientist") ? this.scientistPick : null}/>
+        //         <EventCard playersOnClick={(role == "Scientist") ? this.scientistPick : null}/>
+        //         <EventCard playersOnClick={(role == "Scientist") ? this.scientistPick : null}/>
+        //         <EventCard playersOnClick={(role == "Scientist") ? this.scientistPick : null}/>
+        //      </div>
+        //  )
          const players = [];
          let i = 0;
          for (let user in this.props.users) {
-             players.push(
-             <div key={i} className="game-player-cards-container">
-                <Player name={user}/>
-                { playerCards[i] }
-            </div>
-            )
+             if (this.props.users[user].role != "Scientist") {
+                players.push(
+                    <div key={i} className="game-player-cards-container">
+                       <Player name={user}/>
+                       { playerCards[i] }
+                   </div>
+                   )
+             }
             i++;
          }
+
+         const events = [];
+         let j = 0;
+         for (let event in this.props.event) {
+             if (j > 4) {
+                 break;
+             }
+            
+            events.push(
+                <div key={Math.random()} className="game-event-cards-container">
+                    <h1 className="game-cause-of-death">{event}</h1>
+                    <div className="event-cards-container">
+                        <EventCard id={`${event}+${this.props.event[event][0]}`}event={this.props.event[event][0]} playersOnClick={(role == "Scientist") ? this.scientistPick : null}/>
+                        <EventCard id={`${event}+${this.props.event[event][1]}`}event={this.props.event[event][1]} playersOnClick={(role == "Scientist") ? this.scientistPick : null}/>
+                        <EventCard id={`${event}+${this.props.event[event][2]}`}event={this.props.event[event][2]} playersOnClick={(role == "Scientist") ? this.scientistPick : null}/>
+                        <EventCard id={`${event}+${this.props.event[event][3]}`}event={this.props.event[event][3]} playersOnClick={(role == "Scientist") ? this.scientistPick : null}/>
+                        <EventCard id={`${event}+${this.props.event[event][4]}`}event={this.props.event[event][4]} playersOnClick={(role == "Scientist") ? this.scientistPick : null}/>
+                    </div>
+                </div>
+            )
+            j++;
+         }
+
          
          return (
              <>
@@ -188,26 +252,8 @@ class Game extends React.Component {
                         {players}
                     </div>
                     <div className="game-right-column">
-                        <div className="game-event-cards-container">
-                            <h1 className="game-cause-of-death">Cause of Death</h1>
-                            { eventCardsContainer }
-                        </div>
-                        <div className="game-event-cards-container">
-                            <h1 className="game-location">Location</h1>
-                            { eventCardsContainer }
-                        </div>
-                        <div className="game-event-cards-container">
-                            <h1 className="game-victim-identity">Victim's Identity</h1>
-                            { eventCardsContainer }
-                        </div>
-                        <div className="game-event-cards-container">
-                            <h1 className="game-noticed-by-bystander">Noticed by Bystander</h1>
-                            { eventCardsContainer }
-                        </div>
-                        <div className="game-event-cards-container">
-                            <h1 className="game-victim-build">Victim's Build</h1>
-                            { eventCardsContainer }
-                        </div>
+                        
+                        {events}
                     </div>
                 </div>
              </>

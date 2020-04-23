@@ -1,6 +1,7 @@
 import React from "react";
-import { closeModal } from "../actions/modal_actions"
+import { closeModal } from "../../actions/modal_actions"
 import { connect } from "react-redux";
+import './modal.css';
 
 function Modal({ modal, closeModal }) {
   if (!modal) {
@@ -9,7 +10,7 @@ function Modal({ modal, closeModal }) {
     //modal closes when murder pick is made -> affect state thru sockets
     return (
       <div className="modal-background">
-        <div className="modal-relative">
+        <div className="modal-child">
           <h1>Murder In Progress</h1>
         </div>
       </div>

@@ -25,3 +25,7 @@
 .weapon-card:not( :hover ){ 
     transition: 0.15s;   
  }
+
+ .murderPick {
+    background-color: red;
+}

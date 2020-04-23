@@ -4,8 +4,9 @@ const Card = require("../../models/Card");
 const Event = require("../../models/Event");
 const User = require("../../models/User");
 const ShuffledCard = require('../../models/ShuffledCard');
-router.get('/index',(req,res)=>{
-    Card.find({}).then((cards)=>res.json(cards))
+
+router.get('/index',(req,res) => { 
+    Card.find({}).then((cards) => res.json(cards))
 })
 
 const shuffle = (cards) => {
@@ -28,7 +29,7 @@ const shuffle = (cards) => {
 //   User.deleteMany({}).then((user) => res.json(user));
 // });
 
-router.post('/dealHand',(req,res)=>{
+router.post('/dealHand',(req,res) => {
     ShuffledCard.deleteMany({}).then(() => {
         Card.find({}).then(cardsObj => {
         let cardArr = Object.values(cardsObj);
@@ -44,10 +45,33 @@ router.post('/dealHand',(req,res)=>{
         })
             playersHand.save().then((shuffled) => res.json(shuffled))
                     .catch((err) => console.log(err));
-        res.json(playersHand);
+      
         })
     })
 })
+
+const randomEvents = (events) => {
+//   console.log(events);
+  let eventKeys = Object.keys(events[0]._doc);
+//   let objects = events[0]._doc;
+//   console.log(`event[0]: ${events[0]}`)
+//   console.log(`EventKeys: ${eventKeys}`);
+  let eventRandom = {};
+  eventRandom["location"] = events[0]["Location"];
+  eventRandom["causeOfDeath"] = events[0]["causeOfDeath"];
+  let indexes = [];
+  for (let i = 0; i < 3; i++) {
+    let randomEvent = Math.floor(Math.random() * (eventKeys.length - 6) + 2);
+    if (indexes.includes(randomEvent)) { 
+        i -= 1 ;
+    } else {
+        let chosenEvent = eventKeys[randomEvent];
+        eventRandom[chosenEvent] = events[0][chosenEvent];
+        indexes.push(randomEvent); 
+    }
+  }
+  return eventRandom;
+};
 
 router.get('/start', (req, res) => {
     ShuffledCard.find({}).then((cards) => {
@@ -56,7 +80,7 @@ router.get('/start', (req, res) => {
                 const all = {
                     cards: cards,
                     users: users,
-                    events: events
+                    events: randomEvents(events)
                     }
                 res.json(all);
             })
@@ -64,8 +88,8 @@ router.get('/start', (req, res) => {
     })
 })
 
-router.get('/getHands',(req,res)=>{
-    ShuffledCard.find().then((cards)=>{
+router.get('/getHands', (req, res) => {
+    ShuffledCard.find().then((cards) => {
         res.json(cards);
     })
 })
