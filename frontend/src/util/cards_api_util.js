@@ -9,5 +9,5 @@ export const start = () => {
 };
 
 export const getHands=()=>{
-    return axios.get('/api/cards/getHand')
+    return axios.get('/api/cards/getHands')
 }

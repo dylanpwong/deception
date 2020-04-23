@@ -8,7 +8,7 @@ class WeaponCard extends React.Component {
 
      render() {
          return (
-             <div className="weapon-card">W</div>
+             <div className="weapon-card">{this.props.card.name}</div>
          )
      }
 }

@@ -3,7 +3,7 @@ const router = express.Router();
 const Card = require("../../models/Card");
 const Event = require("../../models/Event");
 const User = require("../../models/User");
-
+const ShuffledCard = require('../../models/ShuffledCard');
 router.get('/index',(req,res)=>{
     Card.find({}).then((cards)=>res.json(cards))
 })
@@ -25,7 +25,7 @@ const shuffle = (cards) => {
         return playerCards;
 }
 
-router.get('/getHand',(req,res)=>{
+router.post('/dealHand',(req,res)=>{
     
     Card.find({}).then(cardsObj => {
        let cardArr = Object.values(cardsObj);
@@ -34,12 +34,14 @@ router.get('/getHand',(req,res)=>{
         let hand2 = shuffle(cardArr);
         let hand3 = shuffle(cardArr);
         let hand4 = shuffle(cardArr);
-       let playersHand ={
+       let playersHand = new ShuffledCard({
            player1: hand1,
            player2: hand2,
            player3: hand3,
            player4: hand4
-       }
+       })
+        playersHand.save().then((shuffled) => res.json(shuffled))
+                .catch((err) => console.log(err));
        res.json(playersHand);
     })
         
@@ -53,7 +55,7 @@ router.get('/getHand',(req,res)=>{
 
 
 router.get('/start', (req, res) => {
-    Card.find({}).then((cards) => {
+    ShuffledCard.find({}).then((cards) => {
         User.find({}).then((users) => {
             Event.find({}).then((events) => {
                 const all = {
@@ -64,6 +66,12 @@ router.get('/start', (req, res) => {
                 res.json(all);
             })
         })
+    })
+})
+
+router.get('/getHands',(req,res)=>{
+    ShuffledCard.find().then((cards)=>{
+        res.json(cards);
     })
 })
 

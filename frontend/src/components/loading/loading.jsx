@@ -1,9 +1,9 @@
 import React from 'react';
 import './loading.css';
 import { Link } from 'react-router-dom';
-import openSocket from "socket.io-client";
-const myURL = 'http://localhost:3000/#/loading';
-const socket = openSocket(myURL);
+// import openSocket from "socket.io-client";
+// const myURL = 'http://localhost:3000/#/loading';
+// const socket = openSocket(myURL);
 class Loading extends React.Component {
 
     constructor(props){
@@ -14,6 +14,7 @@ class Loading extends React.Component {
         //   socket: openSocket(myURL),
         };
         this.playGame = this.playGame.bind(this);
+        this.gameListener=this.gameListener.bind(this);
     }
 
     // players(){
@@ -34,7 +35,7 @@ class Loading extends React.Component {
 
     playerSocket(){
         // let i  = this.state.players.length + 1;
-        socket.on("updatedPlayers",(newUser)=>{
+        this.props.socket.on("updatedPlayers",(newUser)=>{
             if (!this.state.players.includes(newUser)) {
                 // debugger
                 console.log("adding new player")
@@ -49,14 +50,21 @@ class Loading extends React.Component {
         // debugger
         e.preventDefault();
         console.log("in Play Game!!!")
-        socket.emit("playGame");
-        socket.on("playGame2", (data) => {
-                console.log("recieved playGame2")
-                console.log(data);
-                this.props.history.push('/game')
+        this.props.socket.emit("playGame");
+        this.props.updateUsers();
+        // this.props.socket.on("playGame2", (data) => {
+        //         console.log("recieved playGame2")
+        //         console.log(data);
+        //         this.props.history.push('/game')
         
+        // })
+        
+    }
+
+    gameListener(){
+        this.props.socket.on('playGame2',()=>{
+            this.props.history.push('/game')
         })
-        
     }
 
     componentDidMount() {
@@ -73,6 +81,7 @@ class Loading extends React.Component {
                 </>
             );
         }
+        {this.gameListener();}
         let players = this.state.players.map((player, idx) => {
               return (
               <div key={player.username} className="loading-username">

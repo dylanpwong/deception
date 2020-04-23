@@ -17,7 +17,7 @@ export const receiveAll = all => {
     };
 };
 
-export const getHands = () =>{
+export const getHands = () =>dispatch =>{
     return APIUtil.getHands().then((res)=>{
         return dispatch(receiveCards(res))
     })

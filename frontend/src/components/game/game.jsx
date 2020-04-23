@@ -43,24 +43,29 @@ class Game extends React.Component {
                 </>
             )
         }
-        
-         const cardsContainer = (
-            <div className="player-cards-container">
-                <div className="weapon-cards-container">
-                    <WeaponCard />
-                    <WeaponCard />
-                    <WeaponCard />
-                    <WeaponCard />
-                </div>
-                <div className="evidence-cards-container">
-                    <EvidenceCard />
-                    <EvidenceCard />
-                    <EvidenceCard />
-                    <EvidenceCard />
-                </div>
-            </div>
-         )
-
+        const playerCards = this.props.cards.map((ele,idx)=>{
+            // console.log(`ele: ${ele}`)
+            // debugger
+            let player = `player${idx + 1}`
+            const cardsContainer = (
+               <div className="player-cards-container">
+                   <div className="weapon-cards-container">
+                       <WeaponCard card={ele[0]}/>
+                       <WeaponCard card={ele[2]}/>
+                       <WeaponCard card={ele[4]}/>
+                       <WeaponCard card={ele[6]}/>
+                   </div>
+                   <div className="evidence-cards-container">
+                       <EvidenceCard card={ele[1]}/>
+                       <EvidenceCard card={ele[3]}/>
+                       <EvidenceCard card={ele[5]}/>
+                       <EvidenceCard card={ele[7]}/>
+                   </div>
+               </div>
+            )
+            return cardsContainer;
+        })
+        console.log(`playerCards: ${playerCards.length}`)
          const eventCardsContainer = (
              <div className="event-cards-container">
                 <EventCard />
@@ -75,21 +80,21 @@ class Game extends React.Component {
              <>
                 <div className="game-player-role">
                     {/* {this.getName()} */}
-                    <h1>YOU ARE THE MURDERER</h1>
+                    <h1>Role: &nbsp; {this.props.users[this.props.currentUser.username].role}</h1>
                 </div>
                 <div className="game-container">
                     <div className="game-left-column">
                         <div className="game-player-cards-container">
                             <Player name="DYLAN"/>
-                            { cardsContainer }
+                            { playerCards[0] }
                         </div>
                         <div className="game-player-cards-container">
                             <Player name="CONNOR"/>
-                            { cardsContainer }
+                            { playerCards[1] }
                         </div>
                         <div className="game-player-cards-container">
                             <Player name="BRIAN"/>
-                            { cardsContainer }
+                            { playerCards[2] }
                         </div>
                     </div>
                     <div className="game-right-column">

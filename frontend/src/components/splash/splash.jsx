@@ -1,8 +1,8 @@
 import React from 'react';
 import './splash.css';
 import { Link } from 'react-router-dom';
-import openSocket from 'socket.io-client';
-const socket = openSocket("http://localhost:3000/#/");
+// import openSocket from 'socket.io-client';
+// const socket = openSocket("http://localhost:3000/#/");
 class Splash extends React.Component {
 
     constructor (props) {
@@ -26,8 +26,8 @@ class Splash extends React.Component {
         let user = {
             username: this.state.username
         }
-        socket.emit("updatedPlayersSend",user);
         this.props.createUser(user).then((res) => {
+            this.props.socket.emit("updatedPlayersSend",user);
             
            return this.props.history.push('/loading')
         })
