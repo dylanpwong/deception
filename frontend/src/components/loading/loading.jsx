@@ -97,7 +97,7 @@ class Loading extends React.Component {
             );
         });
         let buttonClass;
-        if (this.state.players.length < 2) {
+        if (this.state.players.length < 4) {
             buttonClass = 'not-active';
         } else {
             buttonClass = 'loading-play-button'

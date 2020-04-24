@@ -9,6 +9,15 @@
     max-width: 1400px;
 }
 
+.game-redirect-home {
+    position: absolute;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    left: 30px;
+    top: 30px;
+}
+
 .game-player-role {
     font-family: 'Girassol', cursive;
     width: 100%;
@@ -61,6 +70,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    width: 610px;
 }
 
 .game-event-cards-container h1 {
