@@ -263,7 +263,7 @@ class Game extends React.Component {
          return (
              <>
                 <div className="game-player-role">
-                    <Link to="/" className="game-redirect-home">Go Back to Home</Link>
+                    <Link onClick={()=> location.reload()}to="/" className="game-redirect-home">Go Back to Home</Link>
                     {/* {this.getName()} */}
                     <h1>Role: &nbsp; {this.props.users[this.props.currentUser.username].role}</h1>
                 </div>
@@ -282,4 +282,6 @@ class Game extends React.Component {
 }
 
 export default Game;
+
+
 

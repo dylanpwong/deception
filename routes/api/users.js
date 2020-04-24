@@ -30,7 +30,15 @@ router.post('/create',(req,res)=>{
                 .catch((err) => console.log(err));
     })
 })
+// axios.get('/api/users/index',json)
 
+// const createUser = () =>{
+//     return $.ajax({
+//         method: 'get',
+//         url: '/api/users/index'
+ //           data: json
+//     })
+// }
 router.get('/index',(req,res)=>{
 
     User.find().then((users)=>{
