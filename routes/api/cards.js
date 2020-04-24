@@ -38,11 +38,13 @@ router.post('/dealHand',(req,res) => {
             let hand2 = shuffle(cardArr);
             let hand3 = shuffle(cardArr);
             let hand4 = shuffle(cardArr);
+            let hand5 = shuffle(cardArr);
         let playersHand = new ShuffledCard({
             player1: hand1,
             player2: hand2,
             player3: hand3,
-            player4: hand4
+            player4: hand4,
+            player5: hand5,
         })
         playersHand.save().then((shuffled) => res.json(shuffled))
             .catch((err) => console.log(err));

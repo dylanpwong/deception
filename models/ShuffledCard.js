@@ -20,6 +20,10 @@ const ShuffledCardSchema = new Schema({
     type: Array,
     required: true,
   },
+  player5:{
+    type: Array,
+    required: true
+  },
   date: {
     type: Date,
     default: Date.now,
