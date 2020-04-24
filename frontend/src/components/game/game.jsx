@@ -4,6 +4,7 @@ import EvidenceCard from '../evidence_card/evidence_card_container';
 import EventCard from '../event_card/event_card_container';
 import Player from '../player/player_container';
 import './game.css';
+import { Link } from 'react-router-dom';
 // import openSocket from 'socket.io-client';
 class Game extends React.Component {
      constructor(props) {
@@ -262,6 +263,7 @@ class Game extends React.Component {
          return (
              <>
                 <div className="game-player-role">
+                    <Link to="/" className="game-redirect-home">Go Back to Home</Link>
                     {/* {this.getName()} */}
                     <h1>Role: &nbsp; {this.props.users[this.props.currentUser.username].role}</h1>
                 </div>
