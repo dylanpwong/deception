@@ -169,6 +169,12 @@ class Game extends React.Component {
          })
      }
 
+     refresh(e){
+         e.preventDefault();
+         this.props.history.push('/');
+         window.location.reload();
+     }
+
      render() {
          if (this.props.users === undefined || this.props.cards === undefined) {
             return (
@@ -263,7 +269,7 @@ class Game extends React.Component {
          return (
              <>
                 <div className="game-player-role">
-                    <Link onClick={()=> location.reload()}to="/" className="game-redirect-home">Go Back to Home</Link>
+                    <Link to="/" onClick ={this.refresh.bind(this)}className="game-redirect-home">Go Back to Home</Link>
                     {/* {this.getName()} */}
                     <h1>Role: &nbsp; {this.props.users[this.props.currentUser.username].role}</h1>
                 </div>

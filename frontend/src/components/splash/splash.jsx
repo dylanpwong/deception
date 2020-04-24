@@ -32,6 +32,7 @@ class Splash extends React.Component {
            return this.props.history.push('/loading')
         })
     }
+    
 
     render() {
         return (
