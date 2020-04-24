@@ -112,6 +112,78 @@ const cards = [
         type: 'murder'
     }),
     new Card({
+        name: 'Nintendo Switch',
+        type: 'murder'
+    }),
+    new Card({
+        name: 'Razor',
+        type: 'murder'
+    }),
+    new Card({
+        name: 'Staircase',
+        type: 'murder'
+    }),
+    new Card({
+        name: 'Bike',
+        type: "murder"
+    }),
+    new Card({
+        name: 'Keyboard',
+        type: 'murder',
+    }),
+    new Card({
+        name: 'Spoon',
+        type: 'murder'
+    }),
+    new Card({
+        name: "Microwave",
+        type: 'murder'
+    }),
+    new Card ({
+        name: "Toilet Lid",
+        type: 'murder'
+    }),
+    new Card ({
+        name: 'Toolbox',
+        type: 'murder'
+    }),
+    new Card({
+        name: 'Flaregun',
+        type: 'evidence'
+    }),
+    new Card ({
+        name: 'fish',
+        type: 'evidence'
+    }),
+    new Card({
+        name: 'tape',
+        type: 'evidence'
+    }),
+    new Card({
+        name: 'Bait',
+        type: 'evidence'
+    }),
+    new Card({
+        name: "Pickle",
+        type: "evidence"
+    }),
+    new Card({
+        name: 'Soap',
+        type: 'evidence'
+    }),
+    new Card({
+        name: 'Candy wrapper',
+        type: 'evidence'
+    }),
+    new Card({
+        name: 'Cookie',
+        type: 'evidence'
+    }),
+    new Card({
+        name: 'Sponge',
+        type: 'evidence'
+    }),
+    new Card({
         name: 'Life Preserver',
         type: 'evidence'
     }),
