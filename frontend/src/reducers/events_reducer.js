@@ -7,7 +7,7 @@ const EventsReducer = (state = {}, action) => {
         case RECEIVE_EVENT:
             return Object.assign({}, state, action.event);
         case RECEIVE_ALL: 
-            return action.all.events;
+            return action.all.events[0].events;
         default:
             return state;
     }

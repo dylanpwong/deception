@@ -88,6 +88,10 @@ io.sockets.on('connection',function(socket){
             io.sockets.emit("scientistChoose",target);
         })
 
+        socket.on("investigatorPick", target => {
+            io.sockets.emit("investigatorChoose", target);
+        })
+
         // socket.on('playGame3', function(data,cb){
         //     for (const singleSocket in SOCKET_LIST) {
         //         SOCKET_LIST[singleSocket].emit("playGame2",Object.values(SOCKET_LIST).length)
@@ -107,6 +111,7 @@ io.sockets.on('connection',function(socket){
         })
 
         socket.on('disconnect', function() {
+            User.deleteMany({}).then(console.log("Isaac Sucks eggs"));
             delete SOCKET_LIST[socket.id]
         })
 

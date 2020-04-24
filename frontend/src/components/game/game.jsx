@@ -11,7 +11,8 @@ class Game extends React.Component {
          this.state = {
              Mcount: 0,
              Icount:0,
-             gameStarted: false
+             gameStarted: false,
+             yourCards: false,
         //    socket: openSocket(this.props.location.pathname)
          };
          this.getName = this.getName.bind(this);
@@ -24,6 +25,7 @@ class Game extends React.Component {
          this.playersOnClick = this.playersOnClick.bind(this);
          this.gameListenerClose=this.gameListenerClose.bind(this);
          this.allListen = this.allListen.bind(this);
+         this.allListenForInv = this.allListenForInv.bind(this);
      }
 
 
@@ -48,46 +50,51 @@ class Game extends React.Component {
      }
 
      murderPick(event){ //on click
-        console.log("MurderPicked!");
-        if (this.state.Mcount < 2) {
-            let target = event.target.getAttribute('id');
-            // debugger;
-            // target.classList.add("murderPickFind");
-            // debugger;
-            // this.props.socket.binaryType = 'arrayBuffer';
-
-            let changeClass = function(){
-                console.log("Inside listner for murder click");
-                target.classList.add("murderPick");
-            }
-            this.props.socket.emit("MurderPick",target);
-            this.state.Mcount += 1;
-            console.log(`Mcount: ${this.state.Mcount}`)
-            if (this.state.Mcount === 2) {
-                this.props.socket.emit("MurderPhaseOver");
-            }
-        } else {//normal stuff
-
+        // console.log("MurderPicked!");
+        let target = event.currentTarget;
+        // debugger
+        if((target.getAttribute("name") == this.props.currentUser.player) && this.state.Mcount < 2){
+                if (this.state.Mcount < 2) {
+                    let target = event.target.getAttribute('id');
+                    this.props.socket.emit("MurderPick",target);
+                    this.state.Mcount += 1;
+                    console.log(`Mcount: ${this.state.Mcount}`)
+                    if (this.state.Mcount === 2) {
+                        this.props.socket.emit("MurderPhaseOver");
+                    }
+                } else {//normal stuff
+                    if(this.state.Icount < 2){
+                        let target = event.target.getAttribute("id");
+                        this.props.socket.emit("investigatorPick", target);
+                        this.state.Icount += 1;
+                    }
+                }
+        }else{
+             if ((this.state.Icount < 2) && this.state.Mcount >= 2) {
+               let target = event.target.getAttribute("id");
+               this.props.socket.emit("investigatorPick", target);
+               this.state.Icount += 1;
+             }
         }
+        
      }
 
      scientistPick(event){
          let target = event.target.getAttribute("id");
         
-        this.props.socket.emit("scientistPick",target)
+        this.props.socket.emit("scientistPick",target);
      }
      
      investigatorPick(event){
-        let target = event.target;
-        if(this.state.Icount < 2){
-            target.classList.add("InvestigatorPick"); // class that turns itRoundEnd green
-            this.state.Icount += 1;
-        }
+         if(this.state.Icount < 2){
+                let target = event.target.getAttribute("id");
+                this.props.socket.emit("investigatorPick", target);
+                this.state.Icount += 1;
+            }
      }
 
-     playersOnClick(event){
+     playersOnClick(yourCards){
         let role = this.props.users[this.props.currentUser.username].role;
-
         switch(role){
             case "Murderer":
                 return this.murderPick;
@@ -154,6 +161,13 @@ class Game extends React.Component {
         });
      }
 
+     allListenForInv(){
+         this.props.socket.on("investigatorChoose",target=>{
+             let targetEle = document.getElementById(target);
+            targetEle.classList.add("turnGreen");
+         })
+     }
+
      render() {
          if (this.props.users === undefined || this.props.cards === undefined) {
             return (
@@ -165,35 +179,39 @@ class Game extends React.Component {
         {this.gameListenerForInv()}
         {this.gameListenerClose()}
         {this.allListen()}
+        {this.allListenForInv()}
         // {this.gameTest.bind(this)()}
         {this.gameListenerForMS()}
         {this.gameStart(this.state.gameStarted)}
         // debugger
+        // 
+        let role = this.props.users[this.props.currentUser.username].role;
+        // role === 'murderer' ? '' : 
         const playerCards = this.props.cards.map((ele,idx)=>{
             // console.log(`ele: ${ele}`)
             // debugger
             // let player = `player${idx + 1}`
-            // debugger
+            this.state.yourCards = (this.props.currentUser.username === ele.username);
             const cardsContainer = (
                <div className="player-cards-container">
                    <div className="weapon-cards-container">
-                       <WeaponCard playersOnClick={this.playersOnClick()} key={Math.random()} card={ele[0]}/>
-                       <WeaponCard playersOnClick={this.playersOnClick()} key={Math.random()} card={ele[2]}/>
-                       <WeaponCard playersOnClick={this.playersOnClick()} key={Math.random()} card={ele[4]}/>
-                       <WeaponCard playersOnClick={this.playersOnClick()} key={Math.random()} card={ele[6]}/>
+                       <WeaponCard name={idx +1} playersOnClick={this.playersOnClick()} key={Math.random()} card={ele[0]}/>
+                       <WeaponCard name={idx +1} playersOnClick={this.playersOnClick()} key={Math.random()} card={ele[2]}/>
+                       <WeaponCard name={idx +1} playersOnClick={this.playersOnClick()} key={Math.random()} card={ele[4]}/>
+                       <WeaponCard name={idx +1} playersOnClick={this.playersOnClick()} key={Math.random()} card={ele[6]}/>
                    </div>
                    <div className="evidence-cards-container">
-                       <EvidenceCard playersOnClick={this.playersOnClick()} key={Math.random()}  card={ele[1]}/>
-                       <EvidenceCard playersOnClick={this.playersOnClick()} key={Math.random()}  card={ele[3]}/>
-                       <EvidenceCard playersOnClick={this.playersOnClick()} key={Math.random()}  card={ele[5]}/>
-                       <EvidenceCard playersOnClick={this.playersOnClick()} key={Math.random()}  card={ele[7]}/>
+                       <EvidenceCard name={idx +1} playersOnClick={this.playersOnClick()} key={Math.random()}  card={ele[1]}/>
+                       <EvidenceCard name={idx +1} playersOnClick={this.playersOnClick()} key={Math.random()}  card={ele[3]}/>
+                       <EvidenceCard name={idx +1} playersOnClick={this.playersOnClick()} key={Math.random()}  card={ele[5]}/>
+                       <EvidenceCard name={idx +1} playersOnClick={this.playersOnClick()} key={Math.random()}  card={ele[7]}/>
                    </div>
                </div>
             )
             return cardsContainer;
         })
         // debugger
-        let role = this.props.users[this.props.currentUser.username].role;
+        // let role = this.props.users[this.props.currentUser.username].role;
         console.log(`playerCards: ${playerCards.length}`)
         //  const eventCardsContainer = (
         //      <div className="event-cards-container">

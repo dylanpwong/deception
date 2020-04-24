@@ -1,5 +1,5 @@
 import * as APIUtil from '../util/cards_api_util';
-
+import * as events from '../util/events_api_util';
 export const RECEIVE_CARDS = "RECEIVE_CARDS";
 export const RECEIVE_ALL = "RECEIVE_ALL";
 export const DEALT_CARDS = "DEALT_CARDS";
@@ -45,6 +45,8 @@ export const getAll = () => dispatch => {
 
 export const dealHands = () => dispatch => {
     return APIUtil.dealHands().then((res) => {
-       return dispatch(receiveDealtCards(res))
+        events.randomizeEvents().then((notUsed)=>{
+            return dispatch(receiveDealtCards(res))
+        })
     }) 
 }

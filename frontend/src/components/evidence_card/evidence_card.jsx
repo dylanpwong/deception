@@ -9,7 +9,7 @@ class EvidenceCard extends React.Component {
      render() {
         //  debugger
          return (
-             <div onClick={this.props.playersOnClick} id={`${this.props.card._id}`} className="evidence-card">{this.props.card.name}</div>
+             <div name = {`${this.props.name}`} onClick={this.props.playersOnClick} id={`${this.props.card._id}`} className="evidence-card">{this.props.card.name}</div>
          )
      }
 }
