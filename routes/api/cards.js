@@ -4,6 +4,7 @@ const Card = require("../../models/Card");
 const Event = require("../../models/Event");
 const User = require("../../models/User");
 const ShuffledCard = require('../../models/ShuffledCard');
+const GameEvent = require("../../models/GameEvent")
 
 router.get('/index',(req,res) => { 
     Card.find({}).then((cards) => res.json(cards))
@@ -43,44 +44,21 @@ router.post('/dealHand',(req,res) => {
             player3: hand3,
             player4: hand4
         })
-            playersHand.save().then((shuffled) => res.json(shuffled))
-                    .catch((err) => console.log(err));
+        playersHand.save().then((shuffled) => res.json(shuffled))
+            .catch((err) => console.log(err));
       
         })
     })
 })
 
-const randomEvents = (events) => {
-//   console.log(events);
-  let eventKeys = Object.keys(events[0]._doc);
-//   let objects = events[0]._doc;
-//   console.log(`event[0]: ${events[0]}`)
-//   console.log(`EventKeys: ${eventKeys}`);
-  let eventRandom = {};
-  eventRandom["location"] = events[0]["Location"];
-  eventRandom["causeOfDeath"] = events[0]["causeOfDeath"];
-  let indexes = [];
-  for (let i = 0; i < 3; i++) {
-    let randomEvent = Math.floor(Math.random() * (eventKeys.length - 6) + 2);
-    if (indexes.includes(randomEvent)) { 
-        i -= 1 ;
-    } else {
-        let chosenEvent = eventKeys[randomEvent];
-        eventRandom[chosenEvent] = events[0][chosenEvent];
-        indexes.push(randomEvent); 
-    }
-  }
-  return eventRandom;
-};
-
 router.get('/start', (req, res) => {
     ShuffledCard.find({}).then((cards) => {
         User.find({}).then((users) => {
-            Event.find({}).then((events) => {
+            GameEvent.find({}).then((events) => {
                 const all = {
                     cards: cards,
                     users: users,
-                    events: randomEvents(events)
+                    events: events,
                     }
                 res.json(all);
             })
