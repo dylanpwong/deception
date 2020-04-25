@@ -8,7 +8,7 @@ import Modal from './components/modal/modal.jsx';
 import openSocket from 'socket.io-client';
 // const socket = openSocket("http://localhost:3000/#/");
 const socket = openSocket("https://deception.herokuapp.com/");
-// function transferToGamePage() {
+// function transferToGamePage() {/
 //   socket.on("playGame2", () => {
 
 //   })
