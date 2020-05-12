@@ -9,7 +9,7 @@ class WeaponCard extends React.Component {
      render() {
         //  console.log(this.props.card._id)
          return (
-             <div name={`${this.props.name}`} onClick={this.props.playersOnClick} id={`${this.props.card._id}`} className={`weapon-card`}>{this.props.card.name}</div>
+             <div chosen ={"false"} name={`${this.props.name}`} onClick={this.props.playersOnClick} id={`${this.props.card._id}`} className={`weapon-card`}>{this.props.card.name}</div>
          )
      }
 }

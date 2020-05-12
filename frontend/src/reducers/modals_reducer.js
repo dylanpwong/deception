@@ -1,8 +1,10 @@
 export default (state = null, action) => {
     Object.freeze(state);
     switch (action.type) {
-        case 'OPEN_MODAL':
-            return true;
+        case 'start':
+            return 'start';
+        case 'win':
+            return 'win';
         case 'CLOSE_MODAL':
             return null;
         default:

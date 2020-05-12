@@ -25,8 +25,8 @@ const mapDispatchToProps = dispatch => ({
     updateUsers: () => dispatch(updateUsers()),
     fetchCards: () => dispatch(getCards()),
     fetchEvent: () => dispatch(getEvent()),
-    getHands: ()=>dispatch(getHands()),
-    openModal: () => dispatch(openModal()),
+    getHands: ()=> dispatch(getHands()),
+    openModal: (arg) => dispatch(openModal(arg)),
     closeModal: () => dispatch(closeModal())
 });
 

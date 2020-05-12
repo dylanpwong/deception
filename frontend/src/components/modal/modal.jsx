@@ -6,12 +6,20 @@ import './modal.css';
 function Modal({ modal, closeModal }) {
   if (!modal) {
     return null;
-  } else {
+  } else if (modal === 'start') {
     //modal closes when murder pick is made -> affect state thru sockets
     return (
       <div className="modal-background">
         <div className="modal-child">
           <h1>Murder In Progress</h1>
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="modal-background">
+        <div className="modal-child">
+          <h1>You Win</h1>
         </div>
       </div>
     );

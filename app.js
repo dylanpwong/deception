@@ -79,17 +79,28 @@ io.sockets.on('connection',function(socket){
             io.sockets.emit("RoundStart");
         })
 
-        socket.on("MurderPhaseOver", () => {
+        socket.on("MurderPhaseOver", (murderIds) => {
             console.log("murderPhaseDone")
-            io.sockets.emit("RoundEnd");
+            io.sockets.emit("RoundEnd",murderIds);
         });
 
         socket.on("scientistPick",target=>{
             io.sockets.emit("scientistChoose",target);
-        })
+        });
 
         socket.on("investigatorPick", target => {
-            io.sockets.emit("investigatorChoose", target);
+            if (true){
+                console.log("WIN CHEESE");
+                io.sockets.emit("displayWin");
+            } else {
+                // console.log("turnGreen");
+                // io.sockets.emit("investigatorChoose", target);
+            }    
+        })
+
+        socket.on("winScreen",()=>{
+            console.log("win ACTIVATED!!");
+            io.sockets.emit("displayWin");
         })
 
         // socket.on('playGame3', function(data,cb){
