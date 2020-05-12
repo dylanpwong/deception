@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(70, 69, 69);
+    background-color: rgb(34, 34, 34);
 }
 
 .splash-container {
@@ -76,7 +76,7 @@ body {
 .splash-play-button:hover {
     background-color: red;
     color: white;
-    transition: 0.5s;
+    transition: 0.25s;
 }
 
 .splash-play-button:not( :hover ){ 
@@ -85,5 +85,36 @@ body {
 
 .splash-play-button:active {
     background-color: rgb(165, 11, 5);
+    transition: 0.25s;
+}
+
+.demo-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    left: 40px;
+    top: 40px;
+    background-color: red;
+    border-radius: 5px;
+    font-family: 'Girassol', cursive;
+    color: white;
+    box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.4);
+}
+
+.demo-button:hover {
+    background-color: rgb(180, 33, 33);
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+.demo-button:not( :hover ){ 
+    transition: 0.25s;   
+ }
+
+.demo-button:active {
+    background-color: rgb(94, 5, 2);
     transition: 0.25s;
 }

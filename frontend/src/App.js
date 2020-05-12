@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import SplashContainer from './components/splash/splash_container';
 import LoadingContainer from './components/loading/loading_container';
 import GameContainer from './components/game/game_container';
+import DemoGameContainer from './components/demo_game/demo_game_container';
 import Modal from './components/modal/modal.jsx';
 import openSocket from 'socket.io-client';
 // const socket = openSocket("http://localhost:3000/#/");
@@ -21,6 +22,7 @@ function App() {
         {/* <Route exact path="/game" component={GameContainer} /> */}
         {/* <Route exact path="/loading" component={LoadingContainer} /> */}
         {/* <Route exact path="/" component={SplashContainer} /> */}
+        <Route exact path='/demo' component={DemoGameContainer}/>
         <Route exact path='/game' render={(props)=><GameContainer {...props} socket={socket}/>}/>
         <Route path="/loading"render ={(props)=> <LoadingContainer {...props} socket={socket}/>}/>
         <Route path="/"render={(props)=> <SplashContainer {...props} socket={socket}/>}/>
