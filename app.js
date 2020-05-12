@@ -90,7 +90,7 @@ io.sockets.on('connection',function(socket){
 
         socket.on("investigatorPick", target => {
             if (true){
-                console.log("WIN CHEESE");
+                // console.log("WIN CHEESE");
                 io.sockets.emit("displayWin");
             } else {
                 // console.log("turnGreen");
