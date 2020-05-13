@@ -15,6 +15,8 @@ class Game extends React.Component {
              gameStarted: false,
              yourCards: false,
              correctCount: 0,
+             otherCount:0,
+             usedCards: [],
              murderIds: []
         //    socket: openSocket(this.props.location.pathname)
          };
@@ -91,11 +93,15 @@ class Game extends React.Component {
      investigatorPick(event){
          if(this.state.Icount < 2){
                 let target = event.target.getAttribute("id");
+                let targetEle = event.target;
+                // if (targetEle.getAttribute('chosen') == 'true') {
+                //     this.state.correctCount++;
+                // }
                 this.props.socket.emit("investigatorPick", target);
                 this.state.Icount += 1;
                 
             }
-        if(this.state.Icount >=2){ //multiple Rounds
+        if(this.state.Icount >2){ //multiple Rounds
             this.state.correctCount = 0;
         }
      }
@@ -182,10 +188,14 @@ class Game extends React.Component {
          this.props.socket.on("investigatorChoose",target=>{
              let targetEle = document.getElementById(target);
             targetEle.classList.add("turnGreen");
+             console.log(this.state.correctCount);
 
-            // if(targetEle.getAttribute('chosen')=='true'){
-            //     console.log("Isaac wins")
-            // }
+            if(targetEle.getAttribute('chosen')=='true' && this.state.correctCount>=2){
+                console.log("ISAAC WINS");
+             }else if (targetEle.getAttribute('chosen') == 'true' && !this.state.usedCards.includes(target)) {
+                 this.state.correctCount++;
+                 this.state.usedCards.push(target);
+             }
          })
      }
 
