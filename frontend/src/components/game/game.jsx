@@ -14,6 +14,8 @@ class Game extends React.Component {
              Icount:0,
              gameStarted: false,
              yourCards: false,
+             correctCount: 0,
+             murderIds: []
         //    socket: openSocket(this.props.location.pathname)
          };
          this.getName = this.getName.bind(this);
@@ -91,7 +93,11 @@ class Game extends React.Component {
                 let target = event.target.getAttribute("id");
                 this.props.socket.emit("investigatorPick", target);
                 this.state.Icount += 1;
+                
             }
+        if(this.state.Icount >=2){ //multiple Rounds
+            this.state.correctCount = 0;
+        }
      }
 
      playersOnClick(yourCards){
@@ -114,14 +120,16 @@ class Game extends React.Component {
 
      gameListenerForMS() {
         let role = this.props.users[this.props.currentUser.username].role;
-        if (role === 'Murderer' || role === 'Scientist') {
-            this.props.socket.on("MurderPhase", (target) => {
-                 let targetEle = document.getElementById(target);
-                console.log("Inside lstner for murder click");
-                targetEle.classList.add("murderPick");
-                
-            })  
-        }
+        this.props.socket.on("MurderPhase", (target) => {
+            if(!this.state.murderIds.includes(target)) this.state.murderIds.push(target);
+                if (role === 'Murderer' || role === 'Scientist') {
+                        let targetEle = document.getElementById(target);
+                        targetEle.setAttribute('chosen','true');
+                        console.log("Inside lstner for murder click");
+                        targetEle.classList.add("murderPick"); //change to red
+
+                }
+        })
      }
      
      gameListenerForInv() {
@@ -129,6 +137,7 @@ class Game extends React.Component {
          if (role === 'Investigator') {
              this.props.socket.on("RoundStart", () => {//open Model
                 this.props.openModal();
+
              });
             //  this.props.socket.on("RoundEnd", () => { //Murderer picked 2 close model
             //     console.log("MurderPhase Over!")
@@ -144,6 +153,13 @@ class Game extends React.Component {
                 console.log("MurderPhase Over!");
                 this.state.gameStarted = true;
                 this.props.closeModal();
+                console.log(this.state.murderIds);
+                for(let ids=0;ids<this.state.murderIds.length;ids++){
+                    // console.log(`murderIds: ${this.state.murderIds[ids]}`)
+                    let targetEle = document.getElementById(this.state.murderIds[ids]);
+                    // console.log(`targetEle: ${targetEle}`);
+                    targetEle.setAttribute('chosen','true');
+                }
              });
          }
      }
@@ -166,6 +182,10 @@ class Game extends React.Component {
          this.props.socket.on("investigatorChoose",target=>{
              let targetEle = document.getElementById(target);
             targetEle.classList.add("turnGreen");
+
+            // if(targetEle.getAttribute('chosen')=='true'){
+            //     console.log("Isaac wins")
+            // }
          })
      }
 
@@ -173,6 +193,9 @@ class Game extends React.Component {
          e.preventDefault();
          this.props.history.push('/');
          window.location.reload();
+     }
+     displayWin(){
+
      }
 
      render() {
