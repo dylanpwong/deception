@@ -1,0 +1,8 @@
+.win-text {
+    position: relative;
+    top: 150px;
+    color: white;
+    font-size: 100px;
+    text-align: center;
+    font-family: 'Girassol', cursive;
+}

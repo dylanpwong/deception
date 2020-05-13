@@ -29,7 +29,7 @@
 .demo-game-over {
     text-align: center;
     font-size: 100px;
-    color: white;
+    color: red;
     position: relative;
     top: 80px;
 }

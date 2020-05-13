@@ -78,8 +78,11 @@ class Game extends React.Component {
         }else{
              if ((this.state.Icount < 2) && this.state.Mcount >= 2) {
                let target = event.target.getAttribute("id");
-               this.props.socket.emit("investigatorPick", target);
-               this.state.Icount += 1;
+               let targetEle = event.target;
+                if(!targetEle.classList.contains("turnGreen")){
+                    this.props.socket.emit("investigatorPick", target);
+                    this.state.Icount += 1;
+                }
              }
         }
         
@@ -192,13 +195,14 @@ class Game extends React.Component {
              console.log(this.state.correctCount);
 
             if(targetEle.getAttribute('chosen')=='true' && this.state.correctCount>=2){
-                this.props.history.push('/');
+                this.props.history.push('/win');
                 window.location.reload();
              }else if (targetEle.getAttribute('chosen') == 'true' && !this.state.usedCards.includes(target)) {
                  this.state.correctCount++;
                  this.state.usedCards.push(target);
              }else if(document.getElementsByClassName('turnGreen').length === (Object.values(this.props.users).length * 2 - 2)){
-                 console.log("Isaac LOSES!");
+                this.props.history.push('/lose');
+                window.location.reload();
              }
          })
      }
