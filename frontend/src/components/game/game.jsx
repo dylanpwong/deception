@@ -4,6 +4,7 @@ import EvidenceCard from '../evidence_card/evidence_card_container';
 import EventCard from '../event_card/event_card_container';
 import Player from '../player/player_container';
 import './game.css';
+import '../demo_game/demo_game.css';
 import { Link } from 'react-router-dom';
 // import openSocket from 'socket.io-client';
 class Game extends React.Component {
@@ -191,7 +192,8 @@ class Game extends React.Component {
              console.log(this.state.correctCount);
 
             if(targetEle.getAttribute('chosen')=='true' && this.state.correctCount>=2){
-                console.log("ISAAC WINS");
+                this.props.history.push('/');
+                window.location.reload();
              }else if (targetEle.getAttribute('chosen') == 'true' && !this.state.usedCards.includes(target)) {
                  this.state.correctCount++;
                  this.state.usedCards.push(target);
@@ -303,6 +305,24 @@ class Game extends React.Component {
          
          return (
              <>
+                <div className="game-player-role">
+                    <div className="instructions">Instructions</div>
+                    <div className="instructions-dropdown">
+                        <p className="instructions-text">When the game starts, roles will be randomly assigned to the players. 
+                        <br/> 
+                        <br/>There will be a <span className="murderfont">murderer</span>, a <span className="scientist">scientist</span>, and the rest will be <span className="investigator">investigators</span>. 
+                        <br/>
+                        <br/>Evidence and murder cards will be dealt to everyone except the <span className="scientist">scientist</span>. 
+                        <br/>
+                        <br/>The <span className="murderfont">murderer</span> selects one evidence and one murder card from their hand to describe the murder. 
+                        <br/>
+                        <br/>The <span className="scientist">scientist</span>, the only other person who sees this take place, then chooses event cards that correlate with the cards chosen. 
+                        <br/>
+                        <br/>Using these clues, it is up to the <span className="investigator">investigators</span> to try to deduce who did the crime and how it was done, while the <span className="murderfont">murderer</span> attempts to throw them off their tracks.</p>
+                        <br/>
+                        <p className="instructions-text"><span id="instructions-note">Note:</span> The amount of cards are reduced in the demo for the sake of simplicity.</p>
+                    </div>
+                </div>
                 <div className="game-player-role">
                     <Link to="/" onClick ={this.refresh.bind(this)}className="game-redirect-home">Go Back to Home</Link>
                     {/* {this.getName()} */}

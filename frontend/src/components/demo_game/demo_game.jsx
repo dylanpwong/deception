@@ -28,14 +28,14 @@ class DemoGame extends React.Component {
         if (this.state.count === 0 && (!this.state.selected.includes("Knife") || !this.state.selected.includes("Cheese"))) {
             return (
                 <>
-                    <h1 className="demo-game-over">GAME OVER</h1>
+                    <h1 className="demo-game-over">MURDERER WINS</h1>
                     <Link to="/" className="game-redirect-home">Go Back to Home</Link>
                 </>
             )
         } else if (this.state.count === 0 && this.state.selected.includes("Knife") && this.state.selected.includes("Cheese")) {
             return (
                 <>
-                    <h1 className="demo-victory">YOU CAUGHT DYLAN</h1>
+                    <h1 className="demo-victory">INVESTIGATORS WIN</h1>
                     <Link to="/" className="game-redirect-home">Go Back to Home</Link>
                 </>
             )
