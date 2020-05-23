@@ -18,6 +18,10 @@
     background-color: rgb(27, 192, 12);
 }
 
+.disable-click {
+    pointer-events: none;
+}
+
 .event-selected {
     background-color: rgb(18, 51, 235);
 }

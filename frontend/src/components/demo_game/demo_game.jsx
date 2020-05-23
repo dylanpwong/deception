@@ -22,6 +22,7 @@ class DemoGame extends React.Component {
         this.setState({ count: this.state.count -= 1 });
         this.state.selected.push(e.target.innerHTML);
         e.target.classList.add("evidence-selected");
+        e.target.classList.add("disable-click");
     }
 
     render() {
