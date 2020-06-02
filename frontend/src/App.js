@@ -9,6 +9,7 @@ import Lose from './components/lose/lose';
 import Win from './components/win/win';
 import Modal from './components/modal/modal.jsx';
 import openSocket from 'socket.io-client';
+import Link from './components/links/links'
 
 // const socket = openSocket("http://localhost:3000/#/");
 const socket = openSocket("https://deception.herokuapp.com/");
@@ -32,7 +33,7 @@ function App() {
         <Route path="/loading"render ={(props)=> <LoadingContainer {...props} socket={socket}/>}/>
         <Route path="/"render={(props)=> <SplashContainer {...props} socket={socket}/>}/>
       </Switch>
-
+      <Link />
     </div>
   );
 }
