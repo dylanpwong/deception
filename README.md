@@ -27,6 +27,7 @@ The most important aspect of the game revolves around all players working in uni
 the library Socket.io in order to utilize websockets to be able to update all players' screens simultaneously. 
 
 ## Installation 
-To run both the frontend and backend servers with one command, run npm run dev 
+To run both the frontend and backend servers with one command, run npm run dev. 
+
 Otherwise, use npm run server in the top-level folder and then navigate into the frontend folder of the project and run npm start
 
