@@ -1,5 +1,7 @@
 # Deception
 
+![](./frontend/public/linkedin.gif)
+
 Based on the social deducation game Deception: Murder in Hong Kong, this online implementation requires players to work together in order
 to solve the mystery and determine whom among them is the murderer. 
 
