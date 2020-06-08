@@ -26,7 +26,11 @@ to solve the mystery and determine whom among them is the murderer.
 ## Features
 ### Player Interaction 
 The most important aspect of the game revolves around all players working in unison. This functionality is dependent upon the use of 
-the library Socket.io in order to utilize websockets to be able to update all players' screens simultaneously. 
+the library Socket.io in order to utilize websockets to be able to update all players' screens simultaneously. This is done
+through Socket.io's Emits, and listen functionality.
+
+![](frontend/public/WebSocketsListens:Emits.png)
+Above is a snippet of our server's sockets that are listening and issuing commands. Each socket follows a similiar pattern of listening for a command and then isuuing a response to said command, sometimes passing data inbetween. 
 
 ## Installation 
 To run both the frontend and backend servers with one command, run npm run dev. 
