@@ -42,11 +42,9 @@ Above is a snippet of our server's sockets that are listening and issuing comman
 
 ``` javaScript
 socket.on('playGame', function (data) {
-        //   for (const singleSocket in SOCKET_LIST) {
-        //         SOCKET_LIST[singleSocket].emit("playGame2",Object.values(SOCKET_LIST).length)
-        //   }
+   
         io.sockets.emit("playGame2", Object.values(SOCKET_LIST).length);
-        //   socket.emit('playGame2');
+      
         });
 ```
 
@@ -54,12 +52,36 @@ Here is an example of our server listening for a player to press the "Play Game"
 
 ```javascript
 socket.on("MurderPick", (target) => {
-            // console.log("backendMurder")
             io.sockets.emit("MurderPhase",target);
         });
 ```
 Here is where our server handles the different phases of our game. Once our server recieves a 'MurderPick' emit every player will receive a 'MurderPhase" emit. Once this happens, invesitgators will have there screen blocked while the murderer picks a murder weapon and a evidence card.
 
+```javaScript
+
+    //in game.jsx
+  scientistPick(event){
+         let target = event.target.getAttribute("id");
+        
+        this.props.socket.emit("scientistPick",target);
+     }
+
+    //in app.js, the server
+     socket.on("scientistPick",target=>{
+            io.sockets.emit("scientistChoose",target);
+        })
+
+    //in game.jsx
+        allListen(){
+        this.props.socket.on("scientistChoose",(target)=>{
+            let targetEle = document.getElementById(target);
+            targetEle.classList.add("turnBlue");
+        });
+     }
+```
+
+In the next phase we have our scientist picking clues to help the investigators. Here we have the full cycle. We being with 
+the scientist choosing cards on there end, this sends an emit signal to our backend server that accepts a target Id for the element that the scientist choose. The server then emits to all players, and takes the target element passed through by the scientist, and adds a class to turn it blue for all players.
 
 ## Installation 
 To run both the frontend and backend servers with one command, run npm run dev. 
